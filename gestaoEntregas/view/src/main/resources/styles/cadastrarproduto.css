@@ -3,5 +3,60 @@
  */
 
 .mainFxmlClass {
+    /* Estilo para o layout geral */
+.root {
+    -fx-padding: 20px;
+    -fx-alignment: center;
+    -fx-background-color: #f4f4f9;
+}
+
+/* Estilo para o título */
+.label-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 10px 0;
+}
+
+/* Estilo para os rótulos (Label) */
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #555;
+    -fx-padding: 5px 0;
+}
+
+/* Estilo para os campos de texto (TextField) */
+.text-field {
+    -fx-pref-width: 250px;
+    -fx-padding: 10px;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* Estilo para o botão de salvar */
+.button {
+    -fx-background-color: #6200ee;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #3700b3;
+}
+
+.button:pressed {
+    -fx-background-color: #03dac5;
+}
+
+/* Espaçamento entre os componentes */
+.hbox, .vbox {
+    -fx-spacing: 15px;
+}
+
 
 }
