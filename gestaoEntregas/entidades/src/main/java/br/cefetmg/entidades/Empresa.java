@@ -23,7 +23,6 @@ public class Empresa {
     }
     private String nome;
     private String cnpj;
-    private String cpf;
     private double porcentagemComissaoEntregador;
     
     @OneToMany(fetch = FetchType.EAGER,
@@ -51,15 +50,7 @@ public class Empresa {
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
+    
     public double getPorcentagemComissaoEntregador() {
         return porcentagemComissaoEntregador;
     }

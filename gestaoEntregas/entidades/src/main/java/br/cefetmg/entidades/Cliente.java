@@ -18,7 +18,6 @@ public class Cliente {
     private String endereco;
     private String bairro;
     private String telefone;
-    private String cnpj;
     private String cpf;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -85,15 +84,7 @@ public class Cliente {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
+    
     public String getCpf() {
         return cpf;
     }

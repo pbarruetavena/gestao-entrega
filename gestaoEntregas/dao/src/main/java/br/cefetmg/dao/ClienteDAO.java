@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package br.cefetmg.dao;
 
 
 import br.cefetmg.entidades.Cliente;
 import javax.persistence.*;
 import java.util.List;
+import javax.persistence.criteria.CriteriaQuery;
 
 public class ClienteDAO {
     private EntityManager em;
@@ -43,5 +41,20 @@ public class ClienteDAO {
 
     public List<Cliente> listAll() {
         return em.createQuery("FROM Cliente", Cliente.class).getResultList();
+    }
+    
+    public Cliente selecionar(int id) {
+        em.getTransaction().begin();
+        Cliente c = em.find(Cliente.class, id);
+        return c;
+    }
+    
+    public List<Cliente> pesquisarNome(String nome) {
+        var cb = em.getCriteriaBuilder();
+        CriteriaQuery<Cliente> criteria = cb.createQuery(Cliente.class);
+        var root = criteria.from(Cliente.class);
+        criteria.select(root).where(cb.like(root.get("nome"), "%"+nome+"%"));
+        List<Cliente> lista = em.createQuery(criteria).getResultList();
+        return lista;
     }
 }

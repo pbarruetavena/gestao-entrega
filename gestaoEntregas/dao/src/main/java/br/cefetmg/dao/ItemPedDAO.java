@@ -8,6 +8,7 @@ package br.cefetmg.dao;
 import br.cefetmg.entidades.ItemPed;
 import javax.persistence.*;
 import java.util.List;
+import javax.persistence.criteria.CriteriaQuery;
 
 public class ItemPedDAO {
     private EntityManager em;
@@ -43,6 +44,12 @@ public class ItemPedDAO {
 
     public List<ItemPed> listAll() {
         return em.createQuery("FROM ItemPed", ItemPed.class).getResultList();
+    }
+    
+    public ItemPed selecionar(int id) {
+        em.getTransaction().begin();
+        ItemPed x = em.find(ItemPed.class, id);
+        return x;
     }
 }
 
