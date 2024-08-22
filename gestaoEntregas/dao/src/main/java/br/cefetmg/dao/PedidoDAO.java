@@ -8,6 +8,7 @@ package br.cefetmg.dao;
 import br.cefetmg.entidades.Pedido;
 import javax.persistence.*;
 import java.util.List;
+import javax.persistence.criteria.CriteriaQuery;
 
 public class PedidoDAO {
     private EntityManager em;
@@ -43,6 +44,21 @@ public class PedidoDAO {
 
     public List<Pedido> listAll() {
         return em.createQuery("FROM Pedido", Pedido.class).getResultList();
+    }
+    
+    public Pedido selecionar(int id) {
+        em.getTransaction().begin();
+        Pedido x = em.find(Pedido.class, id);
+        return x;
+    }
+    
+    public List<Pedido> pesquisarData(String data) {
+        var cb = em.getCriteriaBuilder();
+        CriteriaQuery<Pedido> criteria = cb.createQuery(Pedido.class);
+        var root = criteria.from(Pedido.class);
+        criteria.select(root).where(cb.like(root.get("data"), "%"+data+"%"));
+        List<Pedido> lista = em.createQuery(criteria).getResultList();
+        return lista;
     }
 }
 
