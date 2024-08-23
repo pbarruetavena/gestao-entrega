@@ -47,4 +47,15 @@ public class FuncionarioController {
     public Funcionario selecionar(int id) {
         return daof.selecionar(id);
     }
+    
+    public Funcionario selecionar(String email) {
+        return daof.selecionar(email);
+    }
+    
+    public boolean validarLogin(String email, String senha) {
+        Funcionario f = new Funcionario();
+        f.setEmail(email);
+        f.setSenha(senha);
+        return daof.validarLogin(f);
+    }
 }

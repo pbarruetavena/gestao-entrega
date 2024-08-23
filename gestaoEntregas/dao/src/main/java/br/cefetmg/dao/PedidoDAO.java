@@ -5,7 +5,9 @@
 package br.cefetmg.dao;
 
 
+import br.cefetmg.entidades.Empresa;
 import br.cefetmg.entidades.Pedido;
+import java.util.Date;
 import javax.persistence.*;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
@@ -59,6 +61,15 @@ public class PedidoDAO {
         criteria.select(root).where(cb.like(root.get("data"), "%"+data+"%"));
         List<Pedido> lista = em.createQuery(criteria).getResultList();
         return lista;
+    }
+    
+    public List<Pedido> pesquisarPeriodo(Empresa empresa, Date startDate, Date endDate) {
+        String jpql = "SELECT p FROM Pedido p JOIN p.cliente c WHERE c.empresa = :empresa AND p.dt BETWEEN :startDate AND :endDate";
+        TypedQuery<Pedido> query = em.createQuery(jpql, Pedido.class);
+        query.setParameter("empresa", empresa);
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+        return query.getResultList();
     }
 }
 

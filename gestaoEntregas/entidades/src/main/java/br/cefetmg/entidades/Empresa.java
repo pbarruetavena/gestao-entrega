@@ -23,6 +23,11 @@ public class Empresa {
             mappedBy = "empresa")
     private ArrayList<Funcionario> funcionarios;
     
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.PERSIST,
+            mappedBy = "empresa")
+    private ArrayList<Produto> produto;
+    
     public ArrayList<Funcionario> getFuncionarios() {
         return funcionarios;
     }
@@ -74,5 +79,13 @@ public class Empresa {
 
     public void setClientes(ArrayList<Cliente> clientes) {
         this.clientes = clientes;
+    }
+
+    public ArrayList<Produto> getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ArrayList<Produto> produto) {
+        this.produto = produto;
     }
 }

@@ -24,6 +24,9 @@ public class Funcionario {
     private String senha;
     private String telefone;
     
+    @Column(unique = true)
+    private String email;
+    
     @OneToMany(fetch = FetchType.EAGER,
             cascade = CascadeType.PERSIST,
             mappedBy = "funcionario")
@@ -145,5 +148,13 @@ public class Funcionario {
     @Override
     public String toString() {
         return String.valueOf(this.getId());
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

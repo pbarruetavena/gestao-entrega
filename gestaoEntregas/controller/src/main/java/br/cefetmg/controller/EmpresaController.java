@@ -3,6 +3,7 @@ package br.cefetmg.controller;
 
 import br.cefetmg.entidades.Empresa;
 import br.cefetmg.entidades.Relatorio;
+import br.cefetmg.entidades.Pedido;
 import br.cefetmg.dao.*;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  */
 public class EmpresaController {
     private EmpresaDAO daoc;
+    private PedidoDAO dp;
     
     public boolean cadastrar(Empresa x) {
         daoc.create(x);
@@ -50,12 +52,11 @@ public class EmpresaController {
     }
     
     public Relatorio getRelatorio(int id, Date inicio, Date fim) {
-        return null;
-        //return new Relatorio(selecionar(id), inicio, fim);
+        return getRelatorio(selecionar(id), inicio, fim);
     }
     
     public Relatorio getRelatorio(Empresa empresa, Date inicio, Date fim) {
-        return null;
-        //return new Relatorio(empresa, inicio, fim);
+        List<Pedido> pedidos = dp.pesquisarPeriodo(empresa, inicio, fim);
+        return new Relatorio(empresa, inicio, fim, pedidos);
     }
 }

@@ -20,9 +20,14 @@ public class Produto {
     private String nome;
     private String localizacao;
     
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.PERSIST,
+            mappedBy = "produto")
+    private ArrayList<ItemPed> itens;
+    
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_item_item")
-    private ItemPed item;
+    @JoinColumn(name = "id_empresa_empresa")
+    private Empresa empresa;
     
 
     public String getNome() {
@@ -48,5 +53,21 @@ public class Produto {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public ArrayList<ItemPed> getItens() {
+        return itens;
+    }
+
+    public void setItens(ArrayList<ItemPed> itens) {
+        this.itens = itens;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 }
