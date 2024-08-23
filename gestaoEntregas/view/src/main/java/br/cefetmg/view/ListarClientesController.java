@@ -1,26 +1,66 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package br.cefetmg.view;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import br.cefetmg.controller.ClienteController;
+import br.cefetmg.entidades.Cliente;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
+import javafx.scene.input.MouseEvent;
 
-/**
- * FXML Controller class
- *
- * @author Aluno
- */
-public class ListarClientesController implements Initializable {
+import java.util.List;
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+public class ListarClientesController {
+
+    @FXML
+    private ListView<String> clienteListView; 
+
+    @FXML
+    private TextArea detalhesClienteText; 
+
+    @FXML
+    private Button voltarButton;
+
+    private ClienteController clienteController;
+    private List<Cliente> clientesList; 
+    public void initialize() {
+        clienteController = new ClienteController(); 
+    }
+
+    private void carregarClientes() {
+        clientesList = clienteController.listar();  
+        ObservableList<String> clienteNomes = FXCollections.observableArrayList();
+
+        for (Cliente cliente : clientesList) {
+            clienteNomes.add(cliente.getNome());  
+        }
+
+        clienteListView.setItems(clienteNomes);  
+
+        clienteListView.setOnMouseClicked((MouseEvent event) -> {
+            mostrarDetalhesCliente(clienteListView.getSelectionModel().getSelectedIndex());
+        });
+    }
+
+    private void mostrarDetalhesCliente(int index) {
+        if (index >= 0 && index < clientesList.size()) {
+            Cliente clienteSelecionado = clientesList.get(index);  
+            StringBuilder detalhes = new StringBuilder();
+            
+            detalhes.append("Nome: ").append(clienteSelecionado.getNome()).append("\n");
+            detalhes.append("Endereço: ").append(clienteSelecionado.getEndereco()).append("\n");
+            detalhes.append("Bairro: ").append(clienteSelecionado.getBairro()).append("\n");
+            detalhes.append("Telefone: ").append(clienteSelecionado.getTelefone()).append("\n");
+            detalhes.append("CPF: ").append(clienteSelecionado.getCpf()).append("\n");
+
+            detalhesClienteText.setText(detalhes.toString()); 
+        }
+    }
+
+    @FXML
+    public void voltarTela(ActionEvent event) {
+    }
 }

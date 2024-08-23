@@ -1,5 +1,7 @@
 package br.cefetmg.view;
 
+import br.cefetmg.controller.ClienteController;
+import br.cefetmg.entidades.Cliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

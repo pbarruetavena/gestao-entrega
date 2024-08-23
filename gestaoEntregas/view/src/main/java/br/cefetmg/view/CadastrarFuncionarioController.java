@@ -1,7 +1,7 @@
 package br.cefetmg.view;
 
-//import br.cefetmg.controller.FuncionarioController;
-//import br.cefetmg.entidades.Funcionario;
+import br.cefetmg.controller.FuncionarioController;
+import br.cefetmg.entidades.Funcionario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -39,14 +39,14 @@ public class CadastrarFuncionarioController {
 
     @FXML
     private TextField TelText;
-}
 
-//    private FuncionarioController funcionarioController = new FuncionarioController(); 
-//    private boolean isEditing = false; 
-//
-//    @FXML
-//    void onSalvar(ActionEvent event) {
-//       
+
+    private FuncionarioController funcionarioController = new FuncionarioController(); 
+    private boolean isEditing = false; 
+
+    @FXML
+    void onSalvar(ActionEvent event) {
+       
 //        try {
 //            String nome = NomeText.getText();
 //            String senha = SenhaText.getText();
@@ -70,10 +70,10 @@ public class CadastrarFuncionarioController {
 //
 //            try {
 //            if (isEditing) {
-//                funcionarioController.atualizarFuncionario(funcionario);
+//                funcionarioController.atualizar(funcionario);
 //                exibirAlerta(AlertType.INFORMATION, "Sucesso", "Funcionário atualizado com sucesso!");
 //            } else {
-//                funcionarioController.cadastrarFuncionario(funcionario);
+//                funcionarioController.cadastrar(funcionario);
 //                exibirAlerta(AlertType.INFORMATION, "Sucesso", "Funcionário cadastrado com sucesso!");
 //            }
 //        } catch (Exception e) {
@@ -87,16 +87,16 @@ public class CadastrarFuncionarioController {
 //            exibirAlerta(AlertType.ERROR, "Erro", "Erro ao cadastrar o funcionário: " + e.getMessage());
 //        }
 //    }
-//
-//   private void exibirAlerta(AlertType alertType, String title, String message) {
-//        Alert alert = new Alert(alertType);
-//        alert.setTitle(title);
-//        alert.setHeaderText(null);
-//        alert.setContentText(message);
-//        alert.showAndWait();
-//    }
-//
-//    public void setEditing(boolean editing) {
-//        this.isEditing = editing;
-//    }
-//}
+    }
+   private void exibirAlerta(AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public void setEditing(boolean editing) {
+        this.isEditing = editing;
+    }
+}
