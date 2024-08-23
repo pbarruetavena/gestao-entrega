@@ -49,20 +49,3 @@ public class Perfil {
     }
     
 }
-
-
-enum TipoPerfil {
-    ADMINISTRADOR("administrador"),
-    ATENDENTE("atendente"),
-    ENTREGADOR("entregador");
-    
-    private String tipo;
-    
-    TipoPerfil(String tipo) {
-        this.tipo = tipo;
-    }
-    
-    public String getTipo() {
-        return tipo;
-    }
-}
