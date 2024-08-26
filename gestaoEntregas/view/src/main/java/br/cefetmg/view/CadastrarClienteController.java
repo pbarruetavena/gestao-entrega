@@ -18,11 +18,7 @@ public class CadastrarClienteController {
     @FXML
     private TextField BairroText;
 
-    @FXML
-    private Label CnpjLabel;
-
-    @FXML
-    private TextField CnpjText;
+   
 
     @FXML
     private Label LograLabel;
@@ -56,7 +52,7 @@ public class CadastrarClienteController {
 
     @FXML
     void onSalvar(ActionEvent event) {
-        if (NomeText.getText().isEmpty() || BairroText.getText().isEmpty() || CnpjText.getText().isEmpty() ||
+        if (NomeText.getText().isEmpty() || BairroText.getText().isEmpty() || 
             LograText.getText().isEmpty() || TelText.getText().isEmpty() || cpfText.getText().isEmpty()) {
             exibirAlerta(AlertType.ERROR, "Erro", "Preencha todos os campos!");
         } else {

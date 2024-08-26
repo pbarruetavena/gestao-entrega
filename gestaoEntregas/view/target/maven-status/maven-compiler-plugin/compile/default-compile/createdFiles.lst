@@ -1,13 +1,15 @@
-br\cefetmg\view\SecondaryController.class
 br\cefetmg\view\ListarPedidoController.class
 br\cefetmg\view\App.class
 br\cefetmg\view\FazerPedidoController.class
+br\cefetmg\view\Login.class
 module-info.class
 br\cefetmg\view\ListarFuncionariosController.class
 br\cefetmg\view\CadastrarProdutoController.class
 br\cefetmg\view\ListarProdutoController.class
 br\cefetmg\view\InicialEntregaController.class
+br\cefetmg\view\TelaFuncionarioController.class
 br\cefetmg\view\ListarClientesController.class
 br\cefetmg\view\CadastrarClienteController.class
 br\cefetmg\view\PrimaryController.class
+br\cefetmg\view\TESTEController.class
 br\cefetmg\view\CadastrarFuncionarioController.class
