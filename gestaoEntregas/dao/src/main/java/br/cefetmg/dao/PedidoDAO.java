@@ -13,10 +13,12 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 
 public class PedidoDAO {
+    private EntityManagerFactory emf;
     private EntityManager em;
 
-    public PedidoDAO(EntityManager em) {
-        this.em = em;
+    public PedidoDAO() {
+        emf = Persistence.createEntityManagerFactory("br.cefetmg_dao_jar_0.1.0-SNAPSHOTPU");
+        em = emf.createEntityManager();
     }
 
     public void create(Pedido pedido) {

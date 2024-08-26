@@ -10,15 +10,17 @@ import javax.persistence.*;
 import java.util.List;
 
 public class PerfilDAO {
+    private EntityManagerFactory emf;
     private EntityManager em;
 
-    public PerfilDAO(EntityManager em) {
-        this.em = em;
+    public PerfilDAO() {
+        emf = Persistence.createEntityManagerFactory("br.cefetmg_dao_jar_0.1.0-SNAPSHOTPU");
+        em = emf.createEntityManager();
     }
 
-    public void create(Perfil Perfil) {
+    public void create(Perfil perfil) {
         em.getTransaction().begin();
-        em.persist(Perfil);
+        em.persist(perfil);
         em.getTransaction().commit();
     }
 
@@ -26,17 +28,17 @@ public class PerfilDAO {
         return em.find(Perfil.class, id);
     }
 
-    public void update(Perfil Perfil) {
+    public void update(Perfil perfil) {
         em.getTransaction().begin();
-        em.merge(Perfil);
+        em.merge(perfil);
         em.getTransaction().commit();
     }
 
     public void delete(int id) {
         em.getTransaction().begin();
-        Perfil Perfil = em.find(Perfil.class, id);
-        if (Perfil != null) {
-            em.remove(Perfil);
+        Perfil perfil = em.find(Perfil.class, id);
+        if (perfil != null) {
+            em.remove(perfil);
         }
         em.getTransaction().commit();
     }

@@ -16,6 +16,11 @@ public class EmpresaController {
     private EmpresaDAO daoc;
     private PedidoDAO dp;
     
+    public EmpresaController() {
+        daoc = new EmpresaDAO();
+        dp = new PedidoDAO();
+    }
+    
     public boolean cadastrar(Empresa x) {
         daoc.create(x);
         return true;

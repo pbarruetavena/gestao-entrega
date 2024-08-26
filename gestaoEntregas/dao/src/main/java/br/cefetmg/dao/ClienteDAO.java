@@ -8,10 +8,12 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 
 public class ClienteDAO {
+    private EntityManagerFactory emf;
     private EntityManager em;
 
-    public ClienteDAO(EntityManager em) {
-        this.em = em;
+    public ClienteDAO() {
+        emf = Persistence.createEntityManagerFactory("br.cefetmg_dao_jar_0.1.0-SNAPSHOTPU");
+        em = emf.createEntityManager();
     }
 
     public void create(Cliente cliente) {

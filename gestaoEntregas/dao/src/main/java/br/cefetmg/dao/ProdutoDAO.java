@@ -11,15 +11,17 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 
 public class ProdutoDAO {
+    private EntityManagerFactory emf;
     private EntityManager em;
 
-    public ProdutoDAO(EntityManager em) {
-        this.em = em;
+    public ProdutoDAO() {
+        emf = Persistence.createEntityManagerFactory("br.cefetmg_dao_jar_0.1.0-SNAPSHOTPU");
+        em = emf.createEntityManager();
     }
 
-    public void create(Produto Produto) {
+    public void create(Produto produto) {
         em.getTransaction().begin();
-        em.persist(Produto);
+        em.persist(produto);
         em.getTransaction().commit();
     }
 
@@ -27,17 +29,17 @@ public class ProdutoDAO {
         return em.find(Produto.class, id);
     }
 
-    public void update(Produto Produto) {
+    public void update(Produto produto) {
         em.getTransaction().begin();
-        em.merge(Produto);
+        em.merge(produto);
         em.getTransaction().commit();
     }
 
     public void delete(int id) {
         em.getTransaction().begin();
-        Produto Produto = em.find(Produto.class, id);
-        if (Produto != null) {
-            em.remove(Produto);
+        Produto produto = em.find(Produto.class, id);
+        if (produto != null) {
+            em.remove(produto);
         }
         em.getTransaction().commit();
     }

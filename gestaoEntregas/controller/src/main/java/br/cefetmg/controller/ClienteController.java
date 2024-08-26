@@ -13,6 +13,10 @@ import java.util.ArrayList;
 public class ClienteController {
     private ClienteDAO daoc;
     
+    public ClienteController() {
+        daoc = new ClienteDAO();
+    }
+    
     public boolean cadastrar(Cliente c) {
         daoc.create(c);
         return true;

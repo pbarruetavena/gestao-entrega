@@ -11,15 +11,17 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 
 public class ItemPedDAO {
+    private EntityManagerFactory emf;
     private EntityManager em;
 
-    public ItemPedDAO(EntityManager em) {
-        this.em = em;
+    public ItemPedDAO() {
+        emf = Persistence.createEntityManagerFactory("br.cefetmg_dao_jar_0.1.0-SNAPSHOTPU");
+        em = emf.createEntityManager();
     }
 
-    public void create(ItemPed ItemPed) {
+    public void create(ItemPed itemPed) {
         em.getTransaction().begin();
-        em.persist(ItemPed);
+        em.persist(itemPed);
         em.getTransaction().commit();
     }
 
@@ -27,17 +29,17 @@ public class ItemPedDAO {
         return em.find(ItemPed.class, id);
     }
 
-    public void update(ItemPed ItemPed) {
+    public void update(ItemPed itemPed) {
         em.getTransaction().begin();
-        em.merge(ItemPed);
+        em.merge(itemPed);
         em.getTransaction().commit();
     }
 
     public void delete(int id) {
         em.getTransaction().begin();
-        ItemPed ItemPed = em.find(ItemPed.class, id);
-        if (ItemPed != null) {
-            em.remove(ItemPed);
+        ItemPed itemPed = em.find(ItemPed.class, id);
+        if (itemPed != null) {
+            em.remove(itemPed);
         }
         em.getTransaction().commit();
     }
