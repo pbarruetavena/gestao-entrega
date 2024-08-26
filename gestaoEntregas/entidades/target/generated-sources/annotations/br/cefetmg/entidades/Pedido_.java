@@ -4,13 +4,13 @@ import br.cefetmg.entidades.Cliente;
 import br.cefetmg.entidades.Funcionario;
 import br.cefetmg.entidades.ItemPed;
 import br.cefetmg.entidades.StatusPedido;
-import java.sql.Date;
+import java.util.Date;
 import javax.annotation.processing.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-08-23T08:56:35", comments="EclipseLink-2.7.12.v20230209-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-08-26T08:35:01", comments="EclipseLink-2.7.12.v20230209-rNA")
 @StaticMetamodel(Pedido.class)
 public class Pedido_ { 
 

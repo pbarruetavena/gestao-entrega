@@ -13,6 +13,10 @@ import java.util.ArrayList;
 public class ItemPedController {
     private ItemPedDAO daoc;
     
+    public ItemPedController() {
+        daoc = new ItemPedDAO();
+    }
+    
     public boolean cadastrar(ItemPed x) {
         daoc.create(x);
         return true;

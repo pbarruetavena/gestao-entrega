@@ -14,6 +14,11 @@ public class FuncionarioController {
     private FuncionarioDAO daof;
     private PerfilDAO daop;
     
+    public FuncionarioController() {
+        daof = new FuncionarioDAO();
+        daop = new PerfilDAO();
+    }
+    
     public boolean cadastrar(Funcionario f) {
         daof.create(f);
         for(int i = 0; i < f.getPerfis().size(); i++) {

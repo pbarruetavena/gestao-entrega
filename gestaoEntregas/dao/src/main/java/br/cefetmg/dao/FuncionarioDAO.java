@@ -11,15 +11,17 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 
 public class FuncionarioDAO {
+    private EntityManagerFactory emf;
     private EntityManager em;
 
-    public FuncionarioDAO(EntityManager em) {
-        this.em = em;
+    public FuncionarioDAO() {
+        emf = Persistence.createEntityManagerFactory("br.cefetmg_dao_jar_0.1.0-SNAPSHOTPU");
+        em = emf.createEntityManager();
     }
 
-    public void create(Funcionario Funcionario) {
+    public void create(Funcionario funcionario) {
         em.getTransaction().begin();
-        em.persist(Funcionario);
+        em.persist(funcionario);
         em.getTransaction().commit();
     }
 
@@ -27,17 +29,17 @@ public class FuncionarioDAO {
         return em.find(Funcionario.class, id);
     }
 
-    public void update(Funcionario Funcionario) {
+    public void update(Funcionario funcionario) {
         em.getTransaction().begin();
-        em.merge(Funcionario);
+        em.merge(funcionario);
         em.getTransaction().commit();
     }
 
     public void delete(int id) {
         em.getTransaction().begin();
-        Funcionario Funcionario = em.find(Funcionario.class, id);
-        if (Funcionario != null) {
-            em.remove(Funcionario);
+        Funcionario funcionario = em.find(Funcionario.class, id);
+        if (funcionario != null) {
+            em.remove(funcionario);
         }
         em.getTransaction().commit();
     }

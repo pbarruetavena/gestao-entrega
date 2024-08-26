@@ -11,15 +11,19 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 
 public class EmpresaDAO {
+    private EntityManagerFactory emf;
     private EntityManager em;
 
-    public EmpresaDAO(EntityManager em) {
-        this.em = em;
+    public EmpresaDAO() {
+        emf = Persistence.createEntityManagerFactory("br.cefetmg_dao_jar_0.1.0-SNAPSHOTPU");
+        em = emf.createEntityManager();
     }
 
-    public void create(Empresa Empresa) {
+    public void create(Empresa empresa) {
+        System.out.println(em.toString());;
+        
         em.getTransaction().begin();
-        em.persist(Empresa);
+        em.persist(empresa);
         em.getTransaction().commit();
     }
 
@@ -27,17 +31,17 @@ public class EmpresaDAO {
         return em.find(Empresa.class, id);
     }
 
-    public void update(Empresa Empresa) {
+    public void update(Empresa empresa) {
         em.getTransaction().begin();
-        em.merge(Empresa);
+        em.merge(empresa);
         em.getTransaction().commit();
     }
 
     public void delete(int id) {
         em.getTransaction().begin();
-        Empresa Empresa = em.find(Empresa.class, id);
-        if (Empresa != null) {
-            em.remove(Empresa);
+        Empresa empresa = em.find(Empresa.class, id);
+        if (empresa != null) {
+            em.remove(empresa);
         }
         em.getTransaction().commit();
     }
@@ -59,6 +63,16 @@ public class EmpresaDAO {
         criteria.select(root).where(cb.like(root.get("nome"), "%"+nome+"%"));
         List<Empresa> lista = em.createQuery(criteria).getResultList();
         return lista;
+    }
+    
+    public static void main(String[] args) {
+        Empresa empresa = new Empresa();
+        empresa.setCnpj("342354354325");
+        empresa.setNome("empresa");
+        empresa.setPorcentagemComissaoEntregador(3);
+        
+        EmpresaDAO dao = new EmpresaDAO();
+        dao.create(empresa);
     }
 }
 

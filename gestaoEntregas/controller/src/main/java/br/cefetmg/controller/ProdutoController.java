@@ -13,6 +13,10 @@ import java.util.ArrayList;
 public class ProdutoController {
     private ProdutoDAO dao;
     
+    public ProdutoController() {
+        dao = new ProdutoDAO();
+    }
+    
     public boolean cadastrar(Produto x) {
         dao.create(x);
         return true;

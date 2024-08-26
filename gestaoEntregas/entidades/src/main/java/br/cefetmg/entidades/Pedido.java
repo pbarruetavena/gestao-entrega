@@ -4,7 +4,7 @@
  */
 package br.cefetmg.entidades;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import javax.persistence.*;
 
@@ -30,12 +30,12 @@ public class Pedido {
     private ArrayList<ItemPed> itens;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_atendente_atendente")
-    private Funcionario atendente;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_entregador_entregador")
     private Funcionario entregador;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_atendente_atendente")
+    private Funcionario atendente;
 
     public int getId() {
         return id;

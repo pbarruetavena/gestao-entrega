@@ -38,13 +38,13 @@ public class Funcionario {
     
     @OneToMany(fetch = FetchType.EAGER,
             cascade = CascadeType.PERSIST,
-            mappedBy = "atendente")
-    private ArrayList<Pedido> pedidosAtendidos;
+            mappedBy = "entregador")
+    private ArrayList<Pedido> pedidosEntregues;
     
     @OneToMany(fetch = FetchType.EAGER,
             cascade = CascadeType.PERSIST,
-            mappedBy = "entregador")
-    private ArrayList<Funcionario> pedidosEntregues;
+            mappedBy = "atendente")
+    private ArrayList<Pedido> pedidosAtendidos;
 
     public String getNome() {
         return nome;
@@ -123,11 +123,11 @@ public class Funcionario {
         this.pedidosAtendidos = pedidosAtendidos;
     }
 
-    public ArrayList<Funcionario> getPedidosEntregues() {
+    public ArrayList<Pedido> getPedidosEntregues() {
         return pedidosEntregues;
     }
 
-    public void setPedidosEntregues(ArrayList<Funcionario> pedidosEntregues) {
+    public void setPedidosEntregues(ArrayList<Pedido> pedidosEntregues) {
         this.pedidosEntregues = pedidosEntregues;
     }
     

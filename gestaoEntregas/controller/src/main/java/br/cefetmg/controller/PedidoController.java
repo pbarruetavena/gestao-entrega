@@ -13,6 +13,10 @@ import java.util.ArrayList;
 public class PedidoController {
     private PedidoDAO daoc;
     
+    public PedidoController() {
+        daoc = new PedidoDAO();
+    }
+    
     public boolean cadastrar(Pedido x) {
         daoc.create(x);
         return true;
