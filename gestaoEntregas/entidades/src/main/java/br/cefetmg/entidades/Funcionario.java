@@ -7,6 +7,8 @@ package br.cefetmg.entidades;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import java.util.Objects;
+
 
 
 /**
@@ -22,6 +24,9 @@ public class Funcionario {
     private String senha;
     private String telefone;
     
+    @Column(unique = true)
+    private String email;
+    
     @OneToMany(fetch = FetchType.EAGER,
             cascade = CascadeType.PERSIST,
             mappedBy = "funcionario")
@@ -30,6 +35,16 @@ public class Funcionario {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_empresa_empresa")
     private Empresa empresa;
+    
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.PERSIST,
+            mappedBy = "atendente")
+    private ArrayList<Pedido> pedidosAtendidos;
+    
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.PERSIST,
+            mappedBy = "entregador")
+    private ArrayList<Funcionario> pedidosEntregues;
 
     public String getNome() {
         return nome;
@@ -77,5 +92,69 @@ public class Funcionario {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+    
+    public boolean isAtendente() {
+        for(int i = 0; i < perfis.size(); i++) {
+            if(perfis.get(i).equals("atendente")) return true;
+        }
+        return false;
+    }
+    
+    public boolean isEntregador() {
+        for(int i = 0; i < perfis.size(); i++) {
+            if(perfis.get(i).equals("entregador")) return true;
+        }
+        return false;
+    }
+    
+    public boolean isAdministrador() {
+        for(int i = 0; i < perfis.size(); i++) {
+            if(perfis.get(i).equals("administrador")) return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Pedido> getPedidosAtendidos() {
+        return pedidosAtendidos;
+    }
+
+    public void setPedidosAtendidos(ArrayList<Pedido> pedidosAtendidos) {
+        this.pedidosAtendidos = pedidosAtendidos;
+    }
+
+    public ArrayList<Funcionario> getPedidosEntregues() {
+        return pedidosEntregues;
+    }
+
+    public void setPedidosEntregues(ArrayList<Funcionario> pedidosEntregues) {
+        this.pedidosEntregues = pedidosEntregues;
+    }
+    
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Funcionario that = (Funcionario) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.getId());
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

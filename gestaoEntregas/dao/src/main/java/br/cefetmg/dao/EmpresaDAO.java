@@ -8,6 +8,7 @@ package br.cefetmg.dao;
 import br.cefetmg.entidades.Empresa;
 import javax.persistence.*;
 import java.util.List;
+import javax.persistence.criteria.CriteriaQuery;
 
 public class EmpresaDAO {
     private EntityManager em;
@@ -43,6 +44,21 @@ public class EmpresaDAO {
 
     public List<Empresa> listAll() {
         return em.createQuery("FROM Empresa", Empresa.class).getResultList();
+    }
+    
+    public Empresa selecionar(int id) {
+        em.getTransaction().begin();
+        Empresa x = em.find(Empresa.class, id);
+        return x;
+    }
+    
+    public List<Empresa> pesquisarNome(String nome) {
+        var cb = em.getCriteriaBuilder();
+        CriteriaQuery<Empresa> criteria = cb.createQuery(Empresa.class);
+        var root = criteria.from(Empresa.class);
+        criteria.select(root).where(cb.like(root.get("nome"), "%"+nome+"%"));
+        List<Empresa> lista = em.createQuery(criteria).getResultList();
+        return lista;
     }
 }
 

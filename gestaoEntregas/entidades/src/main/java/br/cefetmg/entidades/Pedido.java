@@ -15,7 +15,9 @@ public class Pedido {
     private int id;
 
     private double valorTotal;
-    private Date data;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dt;
     private StatusPedido status;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -26,6 +28,14 @@ public class Pedido {
             cascade = CascadeType.PERSIST,
             mappedBy = "pedido")
     private ArrayList<ItemPed> itens;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_atendente_atendente")
+    private Funcionario atendente;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_entregador_entregador")
+    private Funcionario entregador;
 
     public int getId() {
         return id;
@@ -44,11 +54,11 @@ public class Pedido {
     }
 
     public Date getData() {
-        return data;
+        return dt;
     }
 
     public void setData(Date data) {
-        this.data = data;
+        this.dt = data;
     }
 
     public StatusPedido getStatus() {
@@ -67,22 +77,29 @@ public class Pedido {
         this.cliente = cliente;
     }
 
+    public ArrayList<ItemPed> getItens() {
+        return itens;
+    }
+
+    public void setItens(ArrayList<ItemPed> itens) {
+        this.itens = itens;
+    }
+
+    public Funcionario getAtendente() {
+        return atendente;
+    }
+
+    public void setAtendente(Funcionario atendente) {
+        this.atendente = atendente;
+    }
+
+    public Funcionario getEntregador() {
+        return entregador;
+    }
+
+    public void setEntregador(Funcionario entregador) {
+        this.entregador = entregador;
+    }
+
    
-}
-
-
-enum StatusPedido {
-    EM_PREPARO("Em preparo"),
-    EM_ENTREGA("Em entrega"),
-    ENTREGUE("Entregue");
-    
-    private String status;
-    
-    StatusPedido(String status) {
-        this.status = status;
-    }
-    
-    public String getStatus() {
-        return status;
-    }
 }

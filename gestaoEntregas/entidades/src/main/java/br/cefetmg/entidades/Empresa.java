@@ -14,13 +14,6 @@ public class Empresa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    public ArrayList<Funcionario> getAtendentes() {
-        return atendentes;
-    }
-
-    public void setAtendentes(ArrayList<Funcionario> atendentes) {
-        this.atendentes = atendentes;
-    }
     private String nome;
     private String cnpj;
     private double porcentagemComissaoEntregador;
@@ -28,7 +21,20 @@ public class Empresa {
     @OneToMany(fetch = FetchType.EAGER,
             cascade = CascadeType.PERSIST,
             mappedBy = "empresa")
-    private ArrayList<Funcionario> atendentes;
+    private ArrayList<Funcionario> funcionarios;
+    
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.PERSIST,
+            mappedBy = "empresa")
+    private ArrayList<Produto> produto;
+    
+    public ArrayList<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
+    }
     
     @OneToMany(fetch = FetchType.EAGER,
             cascade = CascadeType.PERSIST,
@@ -73,5 +79,13 @@ public class Empresa {
 
     public void setClientes(ArrayList<Cliente> clientes) {
         this.clientes = clientes;
+    }
+
+    public ArrayList<Produto> getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ArrayList<Produto> produto) {
+        this.produto = produto;
     }
 }

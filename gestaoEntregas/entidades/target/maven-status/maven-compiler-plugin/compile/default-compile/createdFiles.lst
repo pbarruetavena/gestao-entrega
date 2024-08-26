@@ -15,3 +15,4 @@ br\cefetmg\entidades\ItemPed_.class
 br\cefetmg\entidades\Perfil_.class
 br\cefetmg\entidades\StatusPedido.class
 br\cefetmg\entidades\Cliente_.class
+br\cefetmg\entidades\Relatorio.class

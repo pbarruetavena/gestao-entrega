@@ -1,8 +1,2 @@
 br\cefetmg\dao\PerfilDAO.class
 br\cefetmg\dao\EmpresaDAO.class
-br\cefetmg\dao\Dao.class
-br\cefetmg\dao\ItemPedDAO.class
-br\cefetmg\dao\FuncionarioDAO.class
-br\cefetmg\dao\PedidoDAO.class
-br\cefetmg\dao\ClienteDAO.class
-br\cefetmg\dao\ProdutoDAO.class

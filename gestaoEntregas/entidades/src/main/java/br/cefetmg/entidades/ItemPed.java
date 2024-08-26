@@ -24,10 +24,9 @@ public class ItemPed {
     @JoinColumn(name = "id_pedido_pedido")
     private Pedido pedido;
     
-    @OneToMany(fetch = FetchType.EAGER,
-            cascade = CascadeType.PERSIST,
-            mappedBy = "item")
-    private ArrayList<Produto> produtos;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_produto_produto")
+    private Produto produto;
 
     public int getQuantidade() {
         return quantidade;
@@ -62,11 +61,11 @@ public class ItemPed {
         this.id = id;
     }
 
-    public ArrayList<Produto> getProdutos() {
-        return produtos;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setProdutos(ArrayList<Produto> produtos) {
-        this.produtos = produtos;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 }

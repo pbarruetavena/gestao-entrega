@@ -6,6 +6,7 @@ br\cefetmg\view\ListarFuncionarioController.class
 module-info.class
 br\cefetmg\view\CadastrarProdutoController.class
 br\cefetmg\view\ListarProdutoController.class
+br\cefetmg\view\InicialEntregaController.class
 br\cefetmg\view\ListarClientesController.class
 br\cefetmg\view\CadastrarClienteController.class
 br\cefetmg\view\PrimaryController.class
