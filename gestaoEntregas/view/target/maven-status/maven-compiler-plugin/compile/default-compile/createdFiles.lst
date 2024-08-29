@@ -2,7 +2,8 @@ br\cefetmg\view\SecondaryController.class
 br\cefetmg\view\ListarPedidoController.class
 br\cefetmg\view\App.class
 br\cefetmg\view\FazerPedidoController.class
-br\cefetmg\view\ListarFuncionarioController.class
+br\cefetmg\view\GlobalContext.class
+br\cefetmg\view\MenuInicialController.class
 br\cefetmg\view\Login.class
 module-info.class
 br\cefetmg\view\ListarFuncionariosController.class

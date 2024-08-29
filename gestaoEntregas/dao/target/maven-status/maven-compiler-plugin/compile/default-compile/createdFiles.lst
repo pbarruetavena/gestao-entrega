@@ -1,6 +1,7 @@
 br\cefetmg\dao\PerfilDAO.class
 br\cefetmg\dao\EmpresaDAO.class
 br\cefetmg\dao\Dao.class
+module-info.class
 br\cefetmg\dao\ItemPedDAO.class
 br\cefetmg\dao\FuncionarioDAO.class
 br\cefetmg\dao\PedidoDAO.class
