@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -22,7 +23,10 @@ import javafx.scene.control.Button;
  */
 public class MenuInicialController implements Initializable {
 
-        private App app;
+    private App app;
+    
+    @FXML
+    private Label textBemVindo;
 
     @FXML
     private Button SairSis;
@@ -32,38 +36,70 @@ public class MenuInicialController implements Initializable {
     private Button ListarCliente;
     @FXML
     private Button FazerPedido;
+    @FXML
+    private Button CadastrarFuncionario;
+    @FXML
+    private Button CadastrarProduto;
+    @FXML
+    private Button ListarFuncionario;
+    @FXML
+    private Button ListarProdutos;
+    @FXML
+    private Button ListarPedido;
 
     public void setApp(App app) {
         this.app = app;
     }
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)  {
+    public void initialize(URL url, ResourceBundle rb) {
         Funcionario current = GlobalContext.getCurrentFuncionario();
-        if(current == null) {
+        if (current == null) {
             try {
                 app.setRoot("login");
             } catch (IOException ex) {
                 Logger.getLogger(MenuInicialController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+        textBemVindo.setText("Bem vindo(a), " + current.getNome());
+
         CadastrarCliente.setVisible(false);
         ListarCliente.setVisible(false);
         FazerPedido.setVisible(false);
-        
-        if(current.isAtendente()) {
-            System.out.println("dentro do if");
+        CadastrarFuncionario.setVisible(false);;
+        CadastrarProduto.setVisible(false);;
+        ListarFuncionario.setVisible(false);;
+        ListarProdutos.setVisible(false);;
+        ListarPedido.setVisible(false);;
+
+        if (current.isAtendente()) {
             CadastrarCliente.setVisible(true);
             ListarCliente.setVisible(true);
             FazerPedido.setVisible(true);
         }
-    } 
-    
-        @FXML
+
+        if (current.isAdministrador()) {
+            CadastrarCliente.setVisible(true);
+            ListarCliente.setVisible(true);
+            FazerPedido.setVisible(true);
+            CadastrarFuncionario.setVisible(true);
+            CadastrarProduto.setVisible(true);
+            ListarFuncionario.setVisible(true);
+            ListarProdutos.setVisible(true);
+            ListarPedido.setVisible(true);
+
+        }
+        if (current.isEntregador()) {
+          
+            ListarPedido.setVisible(true);
+
+        }
+    }
+
+    @FXML
     private void FazerPedido() throws IOException {
         app.setRoot("FazerPedido");
     }
@@ -77,11 +113,33 @@ public class MenuInicialController implements Initializable {
     private void CadastrarCliente() throws IOException {
         app.setRoot("CadastrarCliente");
     }
+    @FXML
+    private void CadastrarFuncionario() throws IOException {
+        app.setRoot("CadastrarFuncionario");
+    }
+    @FXML
+    private void CadastrarProduto() throws IOException {
+        app.setRoot("CadastrarProduto");
+    }
+    @FXML
+    private void ListarFuncionario() throws IOException {
+        app.setRoot("ListarFuncionario");
+    }
+    @FXML
+    private void ListarProdutos() throws IOException {
+        app.setRoot("Listarfuncionario");
+    }
+    
+    @FXML
+    private void ListarPedidos() throws IOException {
+        app.setRoot("ListarPedidos");
+    }
+    
 
     @FXML
     private void Sair() throws IOException {
         GlobalContext.setCurrentFuncionario(null);
         app.setRoot("login");
     }
-    
+
 }

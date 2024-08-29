@@ -4,6 +4,7 @@ import br.cefetmg.controller.ClienteController;
 import br.cefetmg.controller.EmpresaController;
 import br.cefetmg.entidades.Cliente;
 import br.cefetmg.entidades.Empresa;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class CadastrarClienteController {
+    
+    private App app;
 
     @FXML
     private Label BairroLabel;
@@ -49,6 +52,10 @@ public class CadastrarClienteController {
 
     @FXML
     private TextField cpfText;
+    
+    private void  setApp (App app){
+        this.app  = app;
+    }
 
     @FXML
     void onSalvar(ActionEvent event) {
@@ -84,5 +91,10 @@ public class CadastrarClienteController {
         alerta.setHeaderText(null);
         alerta.setContentText(mensagem);
         alerta.showAndWait();
+    }
+    
+    @FXML
+    private void voltarTela(ActionEvent event) throws IOException {
+        app.setRoot("login");
     }
 }

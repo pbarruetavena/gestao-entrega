@@ -31,6 +31,7 @@ public class ListarClientesController {
 
     public void initialize() {
         clienteController = new ClienteController();
+        this.carregarClientes();
     }
 
     private void carregarClientes() {
