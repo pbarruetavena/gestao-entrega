@@ -1,5 +1,9 @@
 package br.cefetmg.view;
 
+import br.cefetmg.controller.ClienteController;
+import br.cefetmg.controller.EmpresaController;
+import br.cefetmg.entidades.Cliente;
+import br.cefetmg.entidades.Empresa;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -15,12 +19,6 @@ public class CadastrarClienteController {
 
     @FXML
     private TextField BairroText;
-
-    @FXML
-    private Label CnpjLabel;
-
-    @FXML
-    private TextField CnpjText;
 
     @FXML
     private Label LograLabel;
@@ -54,11 +52,29 @@ public class CadastrarClienteController {
 
     @FXML
     void onSalvar(ActionEvent event) {
-        if (NomeText.getText().isEmpty() || BairroText.getText().isEmpty() || CnpjText.getText().isEmpty() ||
+        if (NomeText.getText().isEmpty() || BairroText.getText().isEmpty() || 
             LograText.getText().isEmpty() || TelText.getText().isEmpty() || cpfText.getText().isEmpty()) {
             exibirAlerta(AlertType.ERROR, "Erro", "Preencha todos os campos!");
         } else {
-            exibirAlerta(AlertType.INFORMATION, "Sucesso", "Cliente cadastrado com sucesso!");
+            try {
+                EmpresaController empresaController = new EmpresaController();
+                Empresa empresa = empresaController.selecionar(1); 
+
+                ClienteController clienteController = new ClienteController();
+                Cliente cliente = new Cliente();
+                cliente.setNome(NomeText.getText());
+                cliente.setEndereco(LograText.getText());
+                cliente.setBairro(BairroText.getText());
+                cliente.setTelefone(TelText.getText());
+                cliente.setCpf(cpfText.getText());
+                cliente.setEmpresa(empresa); 
+
+                clienteController.cadastrar(cliente);
+
+                exibirAlerta(AlertType.INFORMATION, "Sucesso", "Cliente cadastrado com sucesso!");
+            } catch (Exception e) {
+                exibirAlerta(AlertType.ERROR, "Erro", "Ocorreu um erro ao salvar o cliente: " + e.getMessage());
+            }
         }
     }
 
