@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.view.ListarFuncionarioController">
-    <stylesheets>
-        <URL value="@/styles/listarfuncionario.css"/>
-    </stylesheets>
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.view.ListarFuncionariosController">
+
+    <VBox alignment="TOP_LEFT" spacing="10" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label text="Lista de Funcionários" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+        </HBox>
+
+        <ListView fx:id="funcionarioListView" prefWidth="200" prefHeight="300"/>
+
+        <Button fx:id="voltarButton" text="Voltar" onAction="#voltarTela" style="-fx-font-size: 14px;"/>
+    </VBox>
+
+    <VBox alignment="TOP_LEFT" spacing="10" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="250.0" prefWidth="300">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label text="Detalhes do Funcionário" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+        </HBox>
+        <TextArea fx:id="detalhesFuncionarioText" prefHeight="250.0" prefWidth="300.0" editable="false"/>
+    </VBox>
+
 </AnchorPane>
