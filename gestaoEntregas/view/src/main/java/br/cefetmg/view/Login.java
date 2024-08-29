@@ -1,6 +1,10 @@
 package br.cefetmg.view;
 
+import br.cefetmg.controller.FuncionarioController;
+import br.cefetmg.entidades.Funcionario;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -10,7 +14,7 @@ import javafx.scene.control.TextField;
 
 public class Login {
 
-
+    private App app;
 
 
     @FXML
@@ -24,18 +28,34 @@ public class Login {
 
     @FXML
     private Label labelUsuario;
+    
+    public void setApp(App app) {
+        this.app = app;
+    }
 
     @FXML
     void handleEnviar(ActionEvent event) {
+        System.out.println("chegou no metodo evt/kefoasjdfgipdsajfoksanfoiasfoia");
 
-        String usuario = TextUsuario.getText();
+        String email = TextUsuario.getText();
         String senha = TextSenha.getText();
         
-        if (usuario.isEmpty() || senha.isEmpty()) {
+        if (email.isEmpty() || senha.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Campos vazios", "Por favor, preencha todos os campos.");
         } else {
-            
-            showAlert(Alert.AlertType.INFORMATION, "Sucesso", "Login realizado com sucesso!");
+            FuncionarioController ctrl = new FuncionarioController();
+            Funcionario current = ctrl.validarLogin(email, senha);
+            if(current == null) {
+                showAlert(Alert.AlertType.ERROR, "Credenciais incorretas", "Por favor, verifique as credenciais.");
+            } else {
+                GlobalContext.setCurrentFuncionario(current);
+                try {
+                    app.setRoot("MenuInicial");
+                } catch (IOException ex) {
+                    System.out.println("Erro em mandar de uma tela pra outra");
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
     

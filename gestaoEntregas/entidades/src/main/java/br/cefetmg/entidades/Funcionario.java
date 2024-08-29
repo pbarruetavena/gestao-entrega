@@ -96,21 +96,21 @@ public class Funcionario {
     
     public boolean isAtendente() {
         for(int i = 0; i < perfis.size(); i++) {
-            if(perfis.get(i).equals("atendente")) return true;
+            if(perfis.get(i).getTipo() == TipoPerfil.ATENDENTE) return true;
         }
         return false;
     }
     
     public boolean isEntregador() {
         for(int i = 0; i < perfis.size(); i++) {
-            if(perfis.get(i).equals("entregador")) return true;
+            if(perfis.get(i).getTipo() == TipoPerfil.ENTREGADOR) return true;
         }
         return false;
     }
     
     public boolean isAdministrador() {
         for(int i = 0; i < perfis.size(); i++) {
-            if(perfis.get(i).equals("administrador")) return true;
+            if(perfis.get(i).getTipo() == TipoPerfil.ADMINISTRADOR) return true;
         }
         return false;
     }

@@ -45,7 +45,7 @@ public class ItemPedDAO {
     }
 
     public List<ItemPed> listAll() {
-        return em.createQuery("FROM ItemPed", ItemPed.class).getResultList();
+        return em.createQuery("SELECT i FROM ItemPed i", ItemPed.class).getResultList();
     }
     
     public ItemPed selecionar(int id) {

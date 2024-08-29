@@ -45,7 +45,7 @@ public class ProdutoDAO {
     }
 
     public List<Produto> listAll() {
-        return em.createQuery("FROM Produto", Produto.class).getResultList();
+        return em.createQuery("SELECT p FROM Produto p", Produto.class).getResultList();
     }
     
     public Produto selecionar(int id) {

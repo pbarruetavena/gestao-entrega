@@ -47,7 +47,7 @@ public class EmpresaDAO {
     }
 
     public List<Empresa> listAll() {
-        return em.createQuery("FROM Empresa", Empresa.class).getResultList();
+        return em.createQuery("SELECT e FROM Empresa e", Empresa.class).getResultList();
     }
     
     public Empresa selecionar(int id) {
@@ -66,13 +66,13 @@ public class EmpresaDAO {
     }
     
     public static void main(String[] args) {
-        Empresa empresa = new Empresa();
-        empresa.setCnpj("342354354325");
-        empresa.setNome("empresa");
-        empresa.setPorcentagemComissaoEntregador(3);
+        
         
         EmpresaDAO dao = new EmpresaDAO();
-        dao.create(empresa);
+        List<Empresa> empresas = dao.listAll();
+        for(Empresa e : empresas) {
+            System.out.println(e.getNome());
+        }
     }
 }
 
