@@ -1,6 +1,7 @@
 br\cefetmg\entidades\Funcionario.class
 br\cefetmg\entidades\ItemPed.class
 br\cefetmg\entidades\Entidades.class
+module-info.class
 br\cefetmg\entidades\Perfil.class
 br\cefetmg\entidades\TipoPerfil.class
 br\cefetmg\entidades\Cliente.class

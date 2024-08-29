@@ -42,6 +42,14 @@ public class Controller {
             p.setFuncionario(funcionario);
             p.setTipo(TipoPerfil.ATENDENTE);
             perfis.add(p);
+            Perfil p2 = new Perfil();
+            p2.setFuncionario(funcionario);
+            p2.setTipo(TipoPerfil.ENTREGADOR);
+            perfis.add(p2);
+            Perfil p3 = new Perfil();
+            p3.setFuncionario(funcionario);
+            p3.setTipo(TipoPerfil.ADMINISTRADOR);
+            perfis.add(p3);
             funcionario.setPerfis((ArrayList<Perfil>) perfis);
             
             FuncionarioController f = new FuncionarioController();

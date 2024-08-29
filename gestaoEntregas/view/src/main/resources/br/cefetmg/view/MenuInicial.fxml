@@ -25,7 +25,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="Bem Vindo" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Label fx:id="textBemVindo" text="Bem Vindo" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -33,7 +33,21 @@
                 <Button fx:id="FazerPedido" contentDisplay="TOP" mnemonicParsing="false" onAction="#FazerPedido" text="Fazer Pedido" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                 <Button fx:id="CadastrarCliente" mnemonicParsing="false" onAction="#CadastrarCliente" text="Cadastrar Cliente" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                 <Button fx:id="ListarCliente" mnemonicParsing="false" onAction="#ListarClientes" text="Listar Clientes" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                <Button mnemonicParsing="false" onAction="#Sair" text="Sair" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+
+                <Button fx:id="ListarFuncionario" mnemonicParsing="false" onAction="#ListarClientes" text="Listar Clientes" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+
+                <Button fx:id="ListarProdutos" mnemonicParsing="false" onAction="#ListarClientes" text="Listar Clientes" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+
+                <Button fx:id="ListarPedido" mnemonicParsing="false" onAction="#ListarClientes" text="Listar Clientes" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+
+                <Button fx:id="CadastrarFuncionario" mnemonicParsing="false" onAction="#ListarClientes" text="Listar Clientes" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+
+                <Button fx:id="Cadastrar" mnemonicParsing="false" onAction="#ListarClientes" text="Listar Clientes" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+
+                <Button fx:id="CadastrarProduto" mnemonicParsing="false" onAction="#ListarClientes" text="Listar Clientes" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+
+                                                                                                                                
+                <Button mnemonicParsing="false" onAction="#Sair" text="Sair" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
             </children>
         </GridPane>
     </children>
