@@ -45,7 +45,7 @@ public class FuncionarioDAO {
     }
 
     public List<Funcionario> listAll() {
-        return em.createQuery("FROM Funcionario", Funcionario.class).getResultList();
+        return em.createQuery("SELECT f FROM Funcionario f", Funcionario.class).getResultList();
     }
     
     public Funcionario selecionar(int id) {
@@ -70,14 +70,14 @@ public class FuncionarioDAO {
         return query.getSingleResult();
     }
     
-    public boolean validarLogin(Funcionario funcionario) {
+    public Funcionario validarLogin(Funcionario funcionario) {
 
-        em.getTransaction().begin();
-        Query query = em.createQuery("SELECT u.email, u.senha FROM Funcionario AS f WHERE f.email = :email AND f.senha = :senha");
+        String jpql = "SELECT f FROM Funcionario f WHERE f.email = :email AND f.senha = :senha";
+        TypedQuery<Funcionario> query = em.createQuery(jpql, Funcionario.class);
         query.setParameter("email", funcionario.getEmail());
         query.setParameter("senha", funcionario.getSenha());
-        List<Funcionario> persist = query.getResultList();
-        return !persist.isEmpty();
+        Funcionario ret = query.getResultStream().findFirst().orElse(null);
+        return ret;
     }
 }
 

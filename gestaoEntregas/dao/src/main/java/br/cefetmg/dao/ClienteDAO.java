@@ -42,7 +42,7 @@ public class ClienteDAO {
     }
 
     public List<Cliente> listAll() {
-        return em.createQuery("FROM Cliente", Cliente.class).getResultList();
+        return em.createQuery("SELECT c FROM Cliente c", Cliente.class).getResultList();
     }
     
     public Cliente selecionar(int id) {

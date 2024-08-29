@@ -5,12 +5,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.view.SecondaryController" spacing="10" alignment="CENTER">
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.view.Login" spacing="10" alignment="CENTER">
     <Label fx:id="labelUsuario" text="Usuário:"/>
     <TextField fx:id="TextUsuario" promptText="Digite seu usuário"/>
     
     <Label fx:id="labelSenha" text="Senha:"/>
     <TextField fx:id="TextSenha" promptText="Digite sua senha" text=""/>
     
-    <Button fx:id="butaoEnviar" text="Enviar" onAction="#handleEnviar"/>
+    <Button fx:id="botao" text="Enviar" onAction="#handleEnviar"/>
 </VBox>
