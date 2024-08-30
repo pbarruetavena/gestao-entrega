@@ -30,51 +30,50 @@ public class CadastrarProdutoController {
     @FXML
     private Label TituloProduto;
 
+    private ProdutoController ProdutoController = new ProdutoController();
+    private boolean isEditing = false;
 
-    private ProdutoController ProdutoController = new ProdutoController(); 
-    private boolean isEditing = false; 
     @FXML
     void onSalvar(ActionEvent event) {
-//        try {
-//            String nomeProduto = NomeText.getText();
-//            String localizacao = LocText.getText();
-//
-//            if (nomeProduto.isEmpty() || localizacao.isEmpty()) {
-//                exibirAlerta(AlertType.ERROR, "Erro", "Por favor, preencha todos os campos!");
-//                return;
-//            }
-//                            Produto produto = new Produto(nomeProduto, localizacao);
-//
-//try {
-//
-//    if (isEditing) {
-//
-//           
-//            
-//               ProdutoController.atualizar(produto);
-//                exibirAlerta(AlertType.INFORMATION, "Sucesso", "Funcionário atualizado com sucesso!");
-//            } else {
-//                ProdutoController.cadastrar(produto);
-//                exibirAlerta(AlertType.INFORMATION, "Sucesso", "Funcionário cadastrado com sucesso!");
-//            }
-//        } catch (Exception e) {
-//            exibirAlerta(AlertType.ERROR, "Erro", "Ocorreu um erro ao salvar o funcionário: " + e.getMessage());
-//        }
-//    
-//
-//            exibirAlerta(AlertType.INFORMATION, "Sucesso", "Funcionário cadastrado com sucesso!");
-//
-//        } catch (Exception e) {
-//            exibirAlerta(AlertType.ERROR, "Erro", "Erro ao cadastrar o funcionário: " + e.getMessage());
-//        }
-//    }
+        try {
+            String nomeProduto = NomeText.getText();
+            String localizacao = LocText.getText();
+
+            if (nomeProduto.isEmpty() || localizacao.isEmpty()) {
+                exibirAlerta(AlertType.ERROR, "Erro", "Preencha todos os campos!");
+                return;
+            }
+            Produto produto = new Produto();
+            produto.setEmpresa(GlobalContext.getCurrentFuncionario().getEmpresa());
+            produto.setLocalizacao(localizacao);
+            produto.setNome(nomeProduto);
+            
+            ProdutoController = new ProdutoController();
+
+            try {
+
+                if (isEditing) {
+
+                    ProdutoController.atualizar(produto);
+                    exibirAlerta(AlertType.INFORMATION, "Sucesso", "Produto atualizado com sucesso!");
+                } else {
+                    ProdutoController.cadastrar(produto);
+                    exibirAlerta(AlertType.INFORMATION, "Sucesso", "Produto cadastrado com sucesso!");
+                }
+            } catch (Exception e) {
+                exibirAlerta(AlertType.ERROR, "Erro", "Ocorreu um erro ao salvar o produto: " + e.getMessage());
+            }
+        } catch (Exception e) {
+            exibirAlerta(AlertType.ERROR, "Erro", "Erro ao cadastrar o produto: " + e.getMessage());
+        }
     }
-   private void exibirAlerta(AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+
+    private void exibirAlerta(AlertType tipo, String titulo, String mensagem) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensagem);
+        alerta.showAndWait();
     }
 
     public void setEditing(boolean editing) {
