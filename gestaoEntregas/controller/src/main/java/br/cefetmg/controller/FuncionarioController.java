@@ -22,11 +22,6 @@ public class FuncionarioController {
     public boolean cadastrar(Funcionario f) {
         System.out.println("chegou no controller de funcionario");
         daof.create(f);
-        System.out.println("cadastrou o func");
-        for(int i = 0; i < f.getPerfis().size(); i++) {
-            daop.create(f.getPerfis().get(i));
-        }
-        System.out.println("cadastrou os perfis");
         return true;
     }
     

@@ -40,19 +40,20 @@ public class ListarClientesController {
             System.out.println("fjdsuahfusdahfisda ta null");
         } else if(clientesList.isEmpty()) {
             System.out.println("shadfufhsduisdafjshdafj isEmpty");
+        } else {
+
+            ObservableList<String> clienteNomes = FXCollections.observableArrayList();
+
+            for (Cliente cliente : clientesList) {
+                clienteNomes.add(cliente.getNome());
+            }
+
+            clienteListView.setItems(clienteNomes);
+
+            clienteListView.setOnMouseClicked((MouseEvent event) -> {
+                mostrarDetalhesCliente(clienteListView.getSelectionModel().getSelectedIndex());
+            });
         }
-        
-        ObservableList<String> clienteNomes = FXCollections.observableArrayList();
-
-        for (Cliente cliente : clientesList) {
-            clienteNomes.add(cliente.getNome());
-        }
-
-        clienteListView.setItems(clienteNomes);
-
-        clienteListView.setOnMouseClicked((MouseEvent event) -> {
-            mostrarDetalhesCliente(clienteListView.getSelectionModel().getSelectedIndex());
-        });
     }
 
     private void mostrarDetalhesCliente(int index) {
@@ -73,7 +74,7 @@ public class ListarClientesController {
 
     @FXML
     private void voltarTela(ActionEvent event) throws IOException {
-        app.setRoot("TelaFuncionario");
+        app.setRoot("MenuInicial");
     
-}
+    }
 }

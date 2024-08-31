@@ -2,6 +2,7 @@ package br.cefetmg.view;
 
 import br.cefetmg.controller.FuncionarioController;
 import br.cefetmg.entidades.Funcionario;
+import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +17,8 @@ import javafx.scene.control.Label;
 
 public class ListarFuncionariosController {
  
+    private App app;
+    
     @FXML
     private Label label;
 
@@ -29,6 +32,10 @@ public class ListarFuncionariosController {
 
     private FuncionarioController funcionarioController;
     private List<Funcionario> funcionariosList; 
+    
+    private void  setApp (App app){
+        this.app  = app;
+    }
 
     public void initialize() {
         funcionarioController = new FuncionarioController();  
@@ -36,17 +43,23 @@ public class ListarFuncionariosController {
     }
     private void carregarFuncionarios() {
         funcionariosList = funcionarioController.listar();  
-        ObservableList<String> funcionarioNomes = FXCollections.observableArrayList();
+        if(funcionariosList == null) {
+            System.out.println("oasjdfoihadsfodsnfoçiadsj null");
+        } else if(funcionariosList.isEmpty()) {
+            System.out.println("fdfoajfisjfsodfjiasfjf empty");
+        } else {
+            ObservableList<String> funcionarioNomes = FXCollections.observableArrayList();
 
-        for (Funcionario funcionario : funcionariosList) {
-            funcionarioNomes.add(funcionario.getNome());  
+            for (Funcionario funcionario : funcionariosList) {
+                funcionarioNomes.add(funcionario.getNome());  
+            }
+
+            funcionarioListView.setItems(funcionarioNomes);  
+
+            funcionarioListView.setOnMouseClicked((MouseEvent event) -> {
+                mostrarDetalhesFuncionario(funcionarioListView.getSelectionModel().getSelectedIndex());
+            });
         }
-
-        funcionarioListView.setItems(funcionarioNomes);  
-
-        funcionarioListView.setOnMouseClicked((MouseEvent event) -> {
-            mostrarDetalhesFuncionario(funcionarioListView.getSelectionModel().getSelectedIndex());
-        });
     }
 
     private void mostrarDetalhesFuncionario(int index) {
@@ -63,6 +76,8 @@ public class ListarFuncionariosController {
     }
 
     @FXML
-    public void voltarTela(ActionEvent event) {
-            }
+    private void voltarTela(ActionEvent event) throws IOException {
+        app.setRoot("MenuInicial");
+    
+    }
 }

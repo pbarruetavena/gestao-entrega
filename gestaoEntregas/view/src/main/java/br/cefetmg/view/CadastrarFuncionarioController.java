@@ -3,6 +3,8 @@ package br.cefetmg.view;
 import br.cefetmg.controller.FuncionarioController;
 import br.cefetmg.entidades.Funcionario;
 import br.cefetmg.entidades.Perfil;
+import br.cefetmg.entidades.TipoPerfil;
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
 public class CadastrarFuncionarioController {
+    
+    private App app;
 
     @FXML
     private CheckBox Administrador;
@@ -40,67 +44,90 @@ public class CadastrarFuncionarioController {
     private TextField SenhaText;
 
     @FXML
-    private TextField TelText;
+    private TextField EmailText;
 
     private FuncionarioController funcionarioController = new FuncionarioController();
     private boolean isEditing = false;
+    
+    private void  setApp (App app){
+        this.app  = app;
+    }
 
     @FXML
     void onSalvar(ActionEvent event) {
 
-//        try {
-//            String nome = NomeText.getText();
-//            String senha = SenhaText.getText();
-//            String telefone = TelText.getText();
-//
-//            ArrayList<Perfil> perfil ;
-//            if (Administrador.isSelected()) {
-//                perfil.add(new Perfil("Administrador"));
-//            }
-//            if (Atendente.isSelected()) {
-//                perfil.add(new Perfil("Atendente"));
-//            }
-//            if (Entregador.isSelected()) {
-//                perfil.add(new Perfil("Entregador"));
-//            }
-//
-//            if (nome.isEmpty() || senha.isEmpty() || telefone.isEmpty() || perfil.isEmpty()) {
-//                exibirAlerta(AlertType.ERROR, "Erro", "Por favor, preencha todos os campos!");
-//                return;
-//            }
-//
-//            Funcionario funcionario = new Funcionario(nome, senha, telefone,perfil);
-//
-//            try {
-//                if (isEditing) {
-//                    funcionarioController.atualizar(funcionario);
-//                    exibirAlerta(AlertType.INFORMATION, "Sucesso", "Funcionário atualizado com sucesso!");
-//                } else {
-//                    funcionarioController.cadastrar(funcionario);
-//                    exibirAlerta(AlertType.INFORMATION, "Sucesso", "Funcionário cadastrado com sucesso!");
-//                }
-//            } catch (Exception e) {
-//                exibirAlerta(AlertType.ERROR, "Erro", "Ocorreu um erro ao salvar o funcionário: " + e.getMessage());
-//            }
-//
-//            exibirAlerta(AlertType.INFORMATION, "Sucesso", "Funcionário cadastrado com sucesso!");
-//
-//        } catch (Exception e) {
-//            exibirAlerta(AlertType.ERROR, "Erro", "Erro ao cadastrar o funcionário: " + e.getMessage());
-//        }
-//    }
-//
-//    private void exibirAlerta(AlertType alertType, String title, String message) {
-//        Alert alert = new Alert(alertType);
-//        alert.setTitle(title);
-//        alert.setHeaderText(null);
-//        alert.setContentText(message);
-//        alert.showAndWait();
-//    }
-//
-//    public void setEditing(boolean editing) {
-//        this.isEditing = editing;
-//    }
-//}
+        try {
+            String nome = NomeText.getText();
+            System.out.println(nome);
+            String senha = SenhaText.getText();
+            System.out.println(senha);
+            String email = EmailText.getText();
+            System.out.println(email);
+            
+            ArrayList<Perfil> perfis = new ArrayList<>() ;
+            if (Administrador.isSelected()) {
+                Perfil p = new Perfil();
+                p.setTipo(TipoPerfil.ADMINISTRADOR);
+                perfis.add(p);
+            }
+            if (Atendente.isSelected()) {
+                Perfil p = new Perfil();
+                p.setTipo(TipoPerfil.ATENDENTE);
+                perfis.add(p);
+            }
+            if (Entregador.isSelected()) {
+                Perfil p = new Perfil();
+                p.setTipo(TipoPerfil.ENTREGADOR);
+                perfis.add(p);
+            }
+
+            if (nome.isEmpty() || senha.isEmpty() || email.isEmpty() || perfis.isEmpty()) {
+                exibirAlerta(AlertType.ERROR, "Erro", "Por favor, preencha todos os campos!");
+                return;
+            }
+
+            Funcionario funcionario = new Funcionario();
+            funcionario.setNome(nome);
+            funcionario.setSenha(senha);
+            funcionario.setEmail(email);
+            for(Perfil p : perfis) {
+                p.setFuncionario(funcionario);
+            }
+            funcionario.setPerfis(perfis);
+
+            try {
+                if (isEditing) {
+                    funcionarioController.atualizar(funcionario);
+                    exibirAlerta(AlertType.INFORMATION, "Sucesso", "Funcionário atualizado com sucesso!");
+                } else {
+                    funcionarioController.cadastrar(funcionario);
+                    exibirAlerta(AlertType.INFORMATION, "Sucesso", "Funcionário cadastrado com sucesso!");
+                }
+            } catch (Exception e) {
+                exibirAlerta(AlertType.ERROR, "Erro", "Ocorreu um erro ao salvar o funcionário: " + e.getMessage());
+            }
+
+            exibirAlerta(AlertType.INFORMATION, "Sucesso", "Funcionário cadastrado com sucesso!");
+
+        } catch (Exception e) {
+            exibirAlerta(AlertType.ERROR, "Erro", "Erro ao cadastrar o funcionário: " + e.getMessage());
+        }
+    }
+
+    private void exibirAlerta(AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public void setEditing(boolean editing) {
+        this.isEditing = editing;
+    }
+    
+    @FXML
+    private void voltarTela(ActionEvent event) throws IOException {
+        app.setRoot("MenuInicial");
     }
 }
