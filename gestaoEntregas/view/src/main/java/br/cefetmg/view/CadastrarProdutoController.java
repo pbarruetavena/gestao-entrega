@@ -2,6 +2,7 @@ package br.cefetmg.view;
 
 import br.cefetmg.controller.ProdutoController;
 import br.cefetmg.entidades.Produto;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -11,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class CadastrarProdutoController {
+    
+    private App app;
 
     @FXML
     private Label LocLabel;
@@ -32,6 +35,10 @@ public class CadastrarProdutoController {
 
     private ProdutoController ProdutoController = new ProdutoController();
     private boolean isEditing = false;
+    
+    private void  setApp (App app){
+        this.app  = app;
+    }
 
     @FXML
     void onSalvar(ActionEvent event) {
@@ -78,5 +85,10 @@ public class CadastrarProdutoController {
 
     public void setEditing(boolean editing) {
         this.isEditing = editing;
+    }
+    
+    @FXML
+    private void voltarTela(ActionEvent event) throws IOException {
+        app.setRoot("MenuInicial");
     }
 }

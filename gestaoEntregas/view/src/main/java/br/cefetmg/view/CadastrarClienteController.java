@@ -95,6 +95,6 @@ public class CadastrarClienteController {
     
     @FXML
     private void voltarTela(ActionEvent event) throws IOException {
-        app.setRoot("login");
+        app.setRoot("MenuInicial");
     }
 }
