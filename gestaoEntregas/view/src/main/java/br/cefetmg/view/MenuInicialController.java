@@ -135,6 +135,11 @@ public class MenuInicialController implements Initializable {
         app.setRoot("ListarPedidos");
     }
     
+    @FXML
+    private void GerarRelatorio() throws IOException {
+        app.setRoot("GerarRelatorio");
+    }
+    
 
     @FXML
     private void Sair() throws IOException {

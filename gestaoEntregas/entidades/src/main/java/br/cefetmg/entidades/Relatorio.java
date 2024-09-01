@@ -4,6 +4,7 @@ package br.cefetmg.entidades;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -21,6 +22,10 @@ public class Relatorio {
     private Map<Funcionario, Double> comissao;
     
     public Relatorio(Empresa empresa, Date inicio, Date fim, List<Pedido> pedidos) {
+        mapPedidos = new HashMap<>();
+        totais = new HashMap<>();
+        comissao = new HashMap<>();
+        
         this.empresa = empresa;
         this.inicio = inicio;
         this.fim = fim;
@@ -46,6 +51,7 @@ public class Relatorio {
         }
         for(Funcionario f : empresa.getFuncionarios()) {
             comissao.put(f, totais.get(f) * c);
+            totais.put(f, totais.get(f) * (1 + c));
         }
         
     }

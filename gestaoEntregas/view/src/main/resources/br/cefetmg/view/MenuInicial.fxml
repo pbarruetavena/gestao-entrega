@@ -42,7 +42,7 @@
 
                 <Button fx:id="CadastrarFuncionario" mnemonicParsing="false" onAction="#CadastrarFuncionario" text="Cadastrar Funcionário" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
 
-                <Button fx:id="Cadastrar" mnemonicParsing="false" onAction="#ListarClientes" text="?" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                <Button fx:id="GerarRelatório" mnemonicParsing="false" onAction="#GerarRelatorio" text="Gerar Relatório" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
 
                 <Button fx:id="CadastrarProduto" mnemonicParsing="false" onAction="#CadastrarProduto" text="Cadastar Produto" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
 

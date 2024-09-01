@@ -90,6 +90,7 @@ public class CadastrarFuncionarioController {
             funcionario.setNome(nome);
             funcionario.setSenha(senha);
             funcionario.setEmail(email);
+            funcionario.setEmpresa(GlobalContext.getCurrentFuncionario().getEmpresa());
             for(Perfil p : perfis) {
                 p.setFuncionario(funcionario);
             }
