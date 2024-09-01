@@ -8,7 +8,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import br.cefetmg.entidades.*;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
@@ -86,12 +88,12 @@ public class FazerPedidoController {
         clienteSelect.setConverter(new StringConverter<Cliente>() {
             @Override
             public String toString(Cliente cliente) {
-                return cliente.getNome(); // Exibe o nome do cliente no ChoiceBox
+                return cliente.getNome(); 
             }
 
             @Override
             public Cliente fromString(String string) {
-                return null; // Não é necessário implementar
+                return null; 
             }
         });
         if(!listaCliente.isEmpty()) clienteSelect.setValue(listaCliente.get(0));
@@ -142,6 +144,7 @@ public class FazerPedidoController {
                     return null;
                 }
             }));
+            itensListView.setItems(listaObsItens);
             
         } else {
             Produto produto = (Produto) produtoSelect.getSelectionModel().getSelectedItem();
@@ -157,9 +160,9 @@ public class FazerPedidoController {
             listaObsItens.get(indexItem).setValorUnitario(pUnit);
 
             adicionarItemButton.setText("Adicionar ao pedido");
+            itensListView.refresh();
         }
         
-        itensListView.setItems(listaObsItens);
             itensListView.setOnMouseClicked((MouseEvent e) -> {
                     atualizaItem(itensListView.getSelectionModel().getSelectedItem(), 
                             itensListView.getSelectionModel().getSelectedIndex());
@@ -167,6 +170,8 @@ public class FazerPedidoController {
         produtoSelect.setValue(0);
         quantidadeText.setText("");
         valorUnitarioText.setText("");
+        edtItem = false;
+        indexItem = -1;
     }
     
     private void atualizaItem(ItemPed i, int index) {
@@ -179,9 +184,61 @@ public class FazerPedidoController {
         indexItem = index;
     }
     
+//    private void printAll() {
+//        System.out.println("======================pedido:==========================");
+//        for(ItemPed i : pedido.getItens()) {
+//            printItem(i);
+//        }
+//        System.out.println("");
+//        System.out.println("====================Obs List ===============================");
+//        for(ItemPed i : listaObsItens) {
+//            printItem(i);
+//        }
+//        System.out.println("");
+//        System.out.println("=========================list view===============================");
+//        for(ItemPed i : itensListView.getItems()) {
+//            printItem(i);
+//        }
+//    }
+//    
+//    private void printItem(ItemPed i) {
+//        System.out.println("----   item  ----");
+//        System.out.println(i.getProduto().getNome());
+//        System.out.println(i.getQuantidade());
+//        System.out.println(i.getValorUnitario());
+//    } 
+    
     @FXML
     private void salvarPedido(ActionEvent event) throws IOException {
-        //
+        pedidoController = new PedidoController();
+        try {
+            pedido.setCliente((Cliente) clienteSelect.getSelectionModel().getSelectedItem());
+            pedido.setStatus(StatusPedido.EM_PREPARO);
+            pedido.setData(new Date());
+            double total = 0;
+            for(ItemPed i : pedido.getItens()) {
+                total += i.getValorUnitario() * i.getQuantidade();
+            }
+            pedido.setValorTotal(total);
+            
+            if(pedido.getItens().isEmpty()) {
+                exibirAlerta(Alert.AlertType.WARNING, "Warning", "Não há itens no pedido!");
+            } else {
+                pedidoController.cadastrar(pedido);
+                exibirAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Pedido cadastrado com sucesso!");
+            }
+            
+        } catch(Exception e) {
+            exibirAlerta(Alert.AlertType.ERROR, "Erro", "Ocorreu um erro ao salvar o pedido: " + e.getMessage());
+        }
+    }
+    
+    private void exibirAlerta(Alert.AlertType tipo, String titulo, String mensagem) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensagem);
+        alerta.showAndWait();
     }
     
     @FXML
