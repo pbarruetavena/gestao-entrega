@@ -28,12 +28,12 @@
             <TextField fx:id="quantidadeText" />
             <Label text="Valor Unitário" />
             <TextField fx:id="valorUnitarioText" />
-            <Button fx:id="adicionarItemButton" mnemonicParsing="false" text="Adicionar ao pedido" />
+            <Button fx:id="adicionarItemButton" onAction="#adicionarItem"  mnemonicParsing="false" text="Adicionar ao pedido" />
          </children>
       </VBox>
       <Label layoutX="132.0" layoutY="41.0" text="Novo Pedido" />
-      <Button fx:id="salvarButton" layoutX="471.0" layoutY="326.0" mnemonicParsing="false" text="Salvar" />
-      <Button fx:id="voltarButton" layoutX="366.0" layoutY="326.0" mnemonicParsing="false" text="Voltar" />
+      <Button fx:id="salvarButton" onAction="#salvarPedido"  layoutX="471.0" layoutY="326.0" mnemonicParsing="false" text="Salvar" />
+      <Button fx:id="voltarButton" onAction="#voltarTela"  layoutX="366.0" layoutY="326.0" mnemonicParsing="false" text="Voltar" />
       <Label layoutX="77.0" layoutY="90.0" text="Cliente" />
       <ChoiceBox fx:id="clienteSelect" layoutX="127.0" layoutY="86.0" prefWidth="150.0" />
    </children>
