@@ -8,9 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="br.cefetmg.view.ListarPedidoController">
-    <stylesheets>
-        <URL value="@/styles/listarpedidos.css" />
-    </stylesheets>
 
     <!-- Lateral para a lista de pedidos -->
     <VBox prefWidth="200.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
