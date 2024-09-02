@@ -1,15 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.view.FazerPedidoController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="br.cefetmg.view.FazerPedidoController">
     <stylesheets>
-        <URL value="@/styles/fazerpedido.css"/>
+        <URL value="@/styles/fazerpedido.css" />
     </stylesheets>
+   <children>
+      <VBox layoutX="323.0" layoutY="41.0" prefHeight="250.0" prefWidth="228.0">
+         <children>
+            <Label text="Itens" />
+            <ListView fx:id="itensListView" prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+      <VBox layoutX="53.0" layoutY="161.0" prefHeight="190.0" prefWidth="228.0">
+         <children>
+            <Label text="Novo item" />
+            <ChoiceBox fx:id="produtoSelect" prefWidth="150.0" />
+            <Label text="Quantidade" />
+            <TextField fx:id="quantidadeText" />
+            <Label text="Valor Unitário" />
+            <TextField fx:id="valorUnitarioText" />
+            <Button fx:id="adicionarItemButton" onAction="#adicionarItem"  mnemonicParsing="false" text="Adicionar ao pedido" />
+         </children>
+      </VBox>
+      <Label layoutX="132.0" layoutY="41.0" text="Novo Pedido" />
+      <Button fx:id="salvarButton" onAction="#salvarPedido"  layoutX="471.0" layoutY="326.0" mnemonicParsing="false" text="Salvar" />
+      <Button fx:id="voltarButton" onAction="#voltarTela"  layoutX="366.0" layoutY="326.0" mnemonicParsing="false" text="Voltar" />
+      <Label layoutX="77.0" layoutY="90.0" text="Cliente" />
+      <ChoiceBox fx:id="clienteSelect" layoutX="127.0" layoutY="86.0" prefWidth="150.0" />
+   </children>
 </AnchorPane>

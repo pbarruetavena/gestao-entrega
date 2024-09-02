@@ -127,12 +127,17 @@ public class MenuInicialController implements Initializable {
     }
     @FXML
     private void ListarProdutos() throws IOException {
-        app.setRoot("Listarfuncionario");
+        app.setRoot("ListarProduto");
     }
     
     @FXML
     private void ListarPedidos() throws IOException {
         app.setRoot("ListarPedidos");
+    }
+    
+    @FXML
+    private void GerarRelatorio() throws IOException {
+        app.setRoot("GerarRelatorio");
     }
     
 
