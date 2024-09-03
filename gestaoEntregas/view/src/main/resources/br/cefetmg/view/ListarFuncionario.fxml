@@ -2,30 +2,48 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.ColumnConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.view.ListarFuncionariosController">
 
-    <VBox alignment="TOP_LEFT" spacing="10" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0">
-        <HBox alignment="CENTER_LEFT" spacing="10">
-            <Label text="Lista de Funcionários" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-        </HBox>
 
-        <ListView fx:id="funcionarioListView" prefWidth="200" prefHeight="300"/>
-
-        <Button fx:id="voltarButton" text="Voltar" onAction="#voltarTela" style="-fx-font-size: 14px;"/>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.view.ListarFuncionariosController">
+    <VBox prefWidth="200.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" styleClass="sidebar-title" text="Funcionários" />
+        <ListView fx:id="funcionarioListView" styleClass="product-list" />
     </VBox>
 
-    <VBox alignment="TOP_LEFT" spacing="10" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="250.0" prefWidth="300">
-        <HBox alignment="CENTER_LEFT" spacing="10">
-            <Label text="Detalhes do Funcionário" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-        </HBox>
-        <TextArea fx:id="detalhesFuncionarioText" prefHeight="250.0" prefWidth="300.0" editable="false"/>
-    </VBox>
+    <VBox alignment="TOP_LEFT" spacing="10.0" styleClass="details-container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" styleClass="titulo" text="Detalhes do Funcionário" />
 
+        <GridPane hgap="10" vgap="10">
+            <columnConstraints>
+                <ColumnConstraints minWidth="100.0" hgrow="ALWAYS" />
+                <ColumnConstraints minWidth="200.0" hgrow="ALWAYS" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="30.0" vgrow="ALWAYS" />
+            </rowConstraints>
+
+            <Label text="Nome:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+            <TextField fx:id="nomeText" promptText="Nome" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+            <Label text="Telefone:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+            <TextField fx:id="telefoneText" promptText="Telefone" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+        </GridPane>
+
+        <HBox spacing="10.0">
+            <Button fx:id="voltarButton" onAction="#voltarTela" styleClass="back-button" text="Voltar" />
+            <Button fx:id="deletarButton" onAction="#deletarFuncionario" styleClass="delete-button" text="Deletar" visible="false" />
+            <Button fx:id="salvarButton" onAction="#salvarAtualizacoes" styleClass="save-button" text="Salvar" visible="false" />
+       
+        </HBox>
+    </VBox>
 </AnchorPane>
