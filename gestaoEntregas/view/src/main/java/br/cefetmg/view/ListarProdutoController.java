@@ -1,85 +1,158 @@
 package br.cefetmg.view;
 
-import br.cefetmg.entidades.Produto;
 import br.cefetmg.controller.ProdutoController;
-import java.io.IOException;
+import br.cefetmg.entidades.Produto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-
-import java.util.List;
-import java.util.ResourceBundle;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import java.io.IOException;
+import java.util.List;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.beans.value.ChangeListener;
 
 public class ListarProdutoController {
 
-    private App app;
-    
     @FXML
     private ListView<String> produtoListView;
 
     @FXML
-    private TextArea detalhesProdutoText;
-
-    @FXML
     private Button voltarButton;
 
-    private ProdutoController produtoController;
-    
-    private List<Produto> produtoList;
+    @FXML
+    private Button salvarButton;
 
-    private void  setApp (App app){
-        this.app  = app;
-    }
-    
+    @FXML
+    private Button deletarButton;
+
+    @FXML
+    private Label NomeLabel;
+
+    @FXML
+    private TextField NomeText;
+
+    @FXML
+    private Label LocalizacaoLabel;
+
+    @FXML
+    private TextField LocalizacaoText;
+
+    private ProdutoController produtoController;
+    private List<Produto> produtoList;
+    private Produto produtoSelecionado;
+
+    private String nomeOriginal;
+    private String localizacaoOriginal;
+
     public void initialize() {
         produtoController = new ProdutoController();
-        this.carregarProdutos();
+        carregarProdutos();
+        adicionarListenersParaTextFields();
     }
-    
+
+    private void adicionarListenersParaTextFields() {
+        ChangeListener<String> textChangeListener = (observable, oldValue, newValue) -> mostrarBotaoSalvar();
+
+        NomeText.textProperty().addListener(textChangeListener);
+        LocalizacaoText.textProperty().addListener(textChangeListener);
+    }
+
+    private void mostrarBotaoSalvar() {
+        if (produtoSelecionado != null) {
+            String nomeAtual = NomeText.getText();
+            String localizacaoAtual = LocalizacaoText.getText();
+            salvarButton.setVisible(!nomeAtual.equals(nomeOriginal) || !localizacaoAtual.equals(localizacaoOriginal));
+        }
+    }
+
     private void carregarProdutos() {
-        produtoController = new ProdutoController();
         produtoList = produtoController.listar();
-    
-        if(produtoList == null) {
-            System.out.println("fjdsuahfusdahfisda ta null");
-        } else if(produtoList.isEmpty()) {
-            System.out.println("shadfufhsduisdafjshdafj isEmpty");
+
+        if (produtoList == null || produtoList.isEmpty()) {
+            System.out.println("Nenhum produto encontrado.");
         } else {
-            
             ObservableList<String> produtosNome = FXCollections.observableArrayList();
-            for(Produto p : produtoList) {
-                produtosNome.add(p.getNome());
+            for (Produto produto : produtoList) {
+                produtosNome.add(produto.getNome());
             }
-            
             produtoListView.setItems(produtosNome);
-            
-                produtoListView.setOnMouseClicked((MouseEvent e) -> {
-                this.mostrarDetalhesProduto(produtoListView.getSelectionModel().getSelectedIndex());
+            produtoListView.setOnMouseClicked((MouseEvent event) -> {
+                mostrarDetalhesProduto(produtoListView.getSelectionModel().getSelectedIndex());
             });
         }
-        
     }
 
     private void mostrarDetalhesProduto(int index) {
         if (index >= 0 && index < produtoList.size()) {
-            Produto produto = produtoList.get(index);
-            StringBuilder detalhes = new StringBuilder();
-            detalhes.append("Nome: ").append(produto.getNome()).append("\n");
-            detalhes.append("Localização: ").append(produto.getLocalizacao()).append("\n");
+            produtoSelecionado = produtoList.get(index);
 
-            detalhesProdutoText.setText(detalhes.toString());
+            nomeOriginal = produtoSelecionado.getNome();
+            localizacaoOriginal = produtoSelecionado.getLocalizacao();
+
+            NomeText.setText(nomeOriginal);
+            LocalizacaoText.setText(localizacaoOriginal);
+
+            mostrarCampos(true);
         }
+    }
+
+    private void mostrarCampos(boolean visivel) {
+        NomeText.setVisible(visivel);
+        LocalizacaoText.setVisible(visivel);
+        deletarButton.setVisible(visivel);
+    }
+
+    @FXML
+    private void salvarAtualizacoes(ActionEvent event) {
+        if (produtoSelecionado != null) {
+            produtoSelecionado.setNome(NomeText.getText());
+            produtoSelecionado.setLocalizacao(LocalizacaoText.getText());
+
+            try {
+                produtoController.atualizar(produtoSelecionado);
+                exibirAlerta(AlertType.INFORMATION, "Sucesso", "Produto atualizado com sucesso!");
+                salvarButton.setVisible(false); 
+            } catch (Exception e) {
+                exibirAlerta(AlertType.ERROR, "Erro", "Ocorreu um erro ao atualizar o produto: " + e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    private void deletarProduto(ActionEvent event) {
+        if (produtoSelecionado != null) {
+            try {
+                produtoController.remover(produtoSelecionado.getId());
+                exibirAlerta(AlertType.INFORMATION, "Sucesso", "Produto removido com sucesso!");
+                carregarProdutos();
+                NomeText.clear();
+                LocalizacaoText.clear();
+                salvarButton.setVisible(false);
+                deletarButton.setVisible(false);
+            } catch (Exception e) {
+                exibirAlerta(AlertType.ERROR, "Erro", "Ocorreu um erro ao remover o produto: " + e.getMessage());
+            }
+        }
+    }
+
+    private void exibirAlerta(AlertType tipo, String titulo, String mensagem) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensagem);
+        alerta.showAndWait();
     }
 
     @FXML
     private void voltarTela(ActionEvent event) throws IOException {
         app.setRoot("MenuInicial");
-    
     }
+
+    private App app;
 }

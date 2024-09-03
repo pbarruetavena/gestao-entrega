@@ -28,7 +28,7 @@ public class Funcionario {
     private String email;
     
     @OneToMany(fetch = FetchType.EAGER,
-            cascade = CascadeType.PERSIST,
+            cascade = CascadeType.ALL,
             mappedBy = "funcionario")
     private ArrayList<Perfil> perfis;
     

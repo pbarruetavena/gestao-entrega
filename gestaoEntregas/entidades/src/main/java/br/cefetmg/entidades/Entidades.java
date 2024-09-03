@@ -27,6 +27,7 @@ public class Entidades {
         empresa.setNome("nome");
         empresa.setPorcentagemComissaoEntregador(3);
         
+        
         em.persist(empresa);
         em.getTransaction().commit();
     }

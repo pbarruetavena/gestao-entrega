@@ -69,11 +69,11 @@ public class MenuInicialController implements Initializable {
         CadastrarCliente.setVisible(false);
         ListarCliente.setVisible(false);
         FazerPedido.setVisible(false);
-        CadastrarFuncionario.setVisible(false);;
-        CadastrarProduto.setVisible(false);;
-        ListarFuncionario.setVisible(false);;
-        ListarProdutos.setVisible(false);;
-        ListarPedido.setVisible(false);;
+        CadastrarFuncionario.setVisible(false);
+        CadastrarProduto.setVisible(false);
+        ListarFuncionario.setVisible(false);
+        ListarProdutos.setVisible(false);
+        ListarPedido.setVisible(false);
 
         if (current.isAtendente()) {
             CadastrarCliente.setVisible(true);
@@ -132,7 +132,7 @@ public class MenuInicialController implements Initializable {
     
     @FXML
     private void ListarPedidos() throws IOException {
-        app.setRoot("ListarPedidos");
+        app.setRoot("ListarPedido");
     }
     
     @FXML

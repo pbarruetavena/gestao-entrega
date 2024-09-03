@@ -21,7 +21,7 @@ public class Produto {
     private String localizacao;
     
     @OneToMany(fetch = FetchType.EAGER,
-            cascade = CascadeType.PERSIST,
+            cascade = CascadeType.ALL,
             mappedBy = "produto")
     private ArrayList<ItemPed> itens;
     
