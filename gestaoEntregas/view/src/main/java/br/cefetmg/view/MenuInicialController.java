@@ -37,8 +37,6 @@ public class MenuInicialController implements Initializable {
     @FXML
     private Button FazerPedido;
     @FXML
-    private Button GerarRelatório;
-    @FXML
     private Button CadastrarFuncionario;
     @FXML
     private Button CadastrarProduto;
@@ -48,8 +46,6 @@ public class MenuInicialController implements Initializable {
     private Button ListarProdutos;
     @FXML
     private Button ListarPedido;
-    @FXML
-    private Button MenuEntrega;
 
     public void setApp(App app) {
         this.app = app;
@@ -78,15 +74,11 @@ public class MenuInicialController implements Initializable {
         ListarFuncionario.setVisible(false);
         ListarProdutos.setVisible(false);
         ListarPedido.setVisible(false);
-        GerarRelatório.setVisible(false);
 
         if (current.isAtendente()) {
             CadastrarCliente.setVisible(true);
             ListarCliente.setVisible(true);
             FazerPedido.setVisible(true);
-            CadastrarProduto.setVisible(true);
-            ListarProdutos.setVisible(true);
-            ListarPedido.setVisible(false);
         }
 
         if (current.isAdministrador()) {
@@ -98,7 +90,6 @@ public class MenuInicialController implements Initializable {
             ListarFuncionario.setVisible(true);
             ListarProdutos.setVisible(true);
             ListarPedido.setVisible(true);
-            GerarRelatório.setVisible(true);
 
         }
         if (current.isEntregador()) {
@@ -106,11 +97,6 @@ public class MenuInicialController implements Initializable {
             ListarPedido.setVisible(true);
 
         }
-    }
-    
-    @FXML
-    private void MenuEntrega() throws IOException {
-        app.setRoot("MenuEntrega");
     }
 
     @FXML

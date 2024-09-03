@@ -47,7 +47,7 @@
             <CheckBox fx:id="Atendente" mnemonicParsing="false" text="Atendente" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
             <CheckBox fx:id="Administrador" mnemonicParsing="false" prefHeight="23.0" prefWidth="124.0" text="Administrador" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
             <Button fx:id="Salvar" onAction="#onSalvar"  mnemonicParsing="false" text="Salvar" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-            <Button fx:id="voltarButton" onAction="#voltarTela" styleClass="back-button" text="Voltar" translateX="300.0" translateY="10.0" />
+            <Button fx:id="voltarButton" onAction="#voltarTela" styleClass="back-button" text="Voltar" translateX="30.0" translateY="10.0" />
 
          </children>
       </GridPane>
