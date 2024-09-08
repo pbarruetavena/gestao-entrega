@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.PasswordField?>
+
 <?import java.net.URL?>
 
 
@@ -17,7 +19,7 @@
     <TextField fx:id="TextUsuario" promptText="Digite seu usuário"/>
     
     <Label fx:id="labelSenha" text="Senha:"/>
-    <TextField fx:id="TextSenha" promptText="Digite sua senha" text=""/>
+    <PasswordField fx:id="SenhaText"  promptText="Digite sua senha"/>
     
     <Button fx:id="botao" text="Enviar" onAction="#handleEnviar"/>
 </VBox>

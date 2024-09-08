@@ -10,15 +10,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class Login {
 
     private App app;
 
-
     @FXML
-    private TextField TextSenha;
+    private PasswordField SenhaText;
 
     @FXML
     private TextField TextUsuario;
@@ -28,7 +28,7 @@ public class Login {
 
     @FXML
     private Label labelUsuario;
-    
+
     public void setApp(App app) {
         this.app = app;
     }
@@ -38,14 +38,14 @@ public class Login {
         System.out.println("chegou no metodo evt/kefoasjdfgipdsajfoksanfoiasfoia");
 
         String email = TextUsuario.getText();
-        String senha = TextSenha.getText();
-        
+        String senha = SenhaText.getText();
+
         if (email.isEmpty() || senha.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Campos vazios", "Por favor, preencha todos os campos.");
         } else {
             FuncionarioController ctrl = new FuncionarioController();
             Funcionario current = ctrl.validarLogin(email, senha);
-            if(current == null) {
+            if (current == null) {
                 showAlert(Alert.AlertType.ERROR, "Credenciais incorretas", "Por favor, verifique as credenciais.");
             } else {
                 GlobalContext.setCurrentFuncionario(current);
@@ -58,11 +58,11 @@ public class Login {
             }
         }
     }
-    
-    private void switchToPrimary(){
-        
+
+    private void switchToPrimary() {
+
     }
-    
+
     private void showAlert(Alert.AlertType type, String title, String message) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
