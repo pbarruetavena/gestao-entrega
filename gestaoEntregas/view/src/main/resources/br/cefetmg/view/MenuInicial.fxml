@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="br.cefetmg.view.MenuInicialController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.view.MenuInicialController">
     <stylesheets>
-        <URL value="@/styles/menuinicial.css" />
+        <URL value="@/styles/cadastrarproduto.css" />
     </stylesheets>
     <children>
         <GridPane layoutX="20.0" layoutY="26.0" prefHeight="374.0" prefWidth="542.0">
@@ -23,9 +23,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="64.66664632161456" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="90.00002034505206" minHeight="30.000020345052064" prefHeight="40.00001017252606" />
-            <RowConstraints maxHeight="75.99998982747394" minHeight="33.333333333333314" prefHeight="50.66668701171875" />
-            <RowConstraints maxHeight="50.666646321614564" minHeight="29.999959309895814" prefHeight="50.666646321614564" />
+                <RowConstraints maxHeight="90.00002034505206" minHeight="30.000020345052064" prefHeight="40.00001017252606" />
+                <RowConstraints maxHeight="75.99998982747394" minHeight="33.333333333333314" prefHeight="50.66668701171875" />
+                <RowConstraints maxHeight="50.666646321614564" minHeight="29.999959309895814" prefHeight="50.666646321614564" />
             </rowConstraints>
             <children>
                 <Label fx:id="textBemVindo" text="Bem Vindo" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -51,6 +51,7 @@
 
                                                                                                                                 
                 <Button mnemonicParsing="false" onAction="#Sair" text="Sair" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                <Button fx:id="InicialEntrega" mnemonicParsing="false" onAction="#InicialEntrega" text="Entregas" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
             </children>
         </GridPane>
     </children>

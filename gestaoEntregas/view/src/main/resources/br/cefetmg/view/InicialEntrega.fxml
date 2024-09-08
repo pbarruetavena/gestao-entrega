@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import java.net.URL?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.view.InicialEntregaController">
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="br.cefetmg.view.InicialEntregaController">
     <stylesheets>
-        <URL value="@/styles/inicialentrega.css" />
+        <URL value="@/styles/cadastrarproduto.css" />
     </stylesheets>
-   <children>
-      <GridPane layoutX="18.0" layoutY="20.0" prefHeight="380.0" prefWidth="581.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="570.3333129882812" minWidth="10.0" prefWidth="387.66666666666663" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.33331298828125" minWidth="10.0" prefWidth="193.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="185.33331298828125" minHeight="10.0" prefHeight="79.99998982747395" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="301.3333333333333" minHeight="10.0" prefHeight="300.6666768391927" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label text="Bem vindo, ££" />
-         </children>
-      </GridPane>
-   </children>
+    <children>
+        <ListView fx:id="pedidoListView" layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0" />
+        <ListView fx:id="itensListView" layoutX="250.0" layoutY="30.0" prefHeight="150.0" prefWidth="200.0" visible="false" />
+        
+        <Label layoutX="250.0" layoutY="190.0" text="Valor Total:" />
+        <TextField fx:id="valorTotalText" layoutX="320.0" layoutY="190.0" visible="false" />
+        
+        <Button fx:id="salvarButton" layoutX="250.0" layoutY="230.0" mnemonicParsing="false" text="Salvar" visible="false" />
+        <Button fx:id="deletarButton" layoutX="320.0" layoutY="230.0" mnemonicParsing="false" text="Deletar" visible="false" />
+        <Button fx:id="iniciarEntregaButton" layoutX="400.0" layoutY="230.0" mnemonicParsing="false" onAction="#iniciarEntrega" text="Iniciar Entrega" visible="false" />
+        
+        <Button fx:id="voltarButton" layoutX="30.0" layoutY="240.0" mnemonicParsing="false" onAction="#voltarTela" text="Voltar" />
+    </children>
 </AnchorPane>

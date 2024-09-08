@@ -19,6 +19,7 @@ br\cefetmg\view\InicialEntregaController.class
 br\cefetmg\view\GerarRelatorioController$1.class
 br\cefetmg\view\ListarClientesController.class
 br\cefetmg\view\CadastrarClienteController.class
+br\cefetmg\view\ConfirmacaoEntregaController.class
 br\cefetmg\view\GerarRelatorioController.class
 br\cefetmg\view\PrimaryController.class
 br\cefetmg\view\TESTEController.class

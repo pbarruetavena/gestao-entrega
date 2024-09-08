@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="br.cefetmg.view.FazerPedidoController">
     <stylesheets>
-        <URL value="@/styles/fazerpedido.css" />
+        <URL value="@/styles/cadastrarproduto.css" />
     </stylesheets>
    <children>
       <VBox layoutX="323.0" layoutY="41.0" prefHeight="250.0" prefWidth="228.0">
