@@ -3,8 +3,10 @@ package br.cefetmg.view;
 import br.cefetmg.controller.PedidoController;
 import br.cefetmg.entidades.ItemPed;
 import br.cefetmg.entidades.Pedido;
+import br.cefetmg.entidades.StatusPedido;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -15,8 +17,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.util.Callback;
 
 public class InicialEntregaController implements Initializable {
 
@@ -54,46 +58,80 @@ public class InicialEntregaController implements Initializable {
 
         iniciarEntregaButton.setVisible(false);
 
-        // Configurando o listener para a lista de pedidos
         pedidoListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 int selectedIndex = pedidoListView.getSelectionModel().getSelectedIndex();
                 mostrarDetalhesPedido(selectedIndex);
             }
         });
+
+        // Configurar a ListView de itens para exibir ItemPed corretamente
+        itensListView.setCellFactory(new Callback<ListView<ItemPed>, ListCell<ItemPed>>() {
+            @Override
+            public ListCell<ItemPed> call(ListView<ItemPed> param) {
+                return new ListCell<ItemPed>() {
+                    @Override
+                    protected void updateItem(ItemPed item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            setText(item.getProduto().getNome() + " - Qtd: " + item.getQuantidade());
+                        }
+                    }
+                };
+            }
+        });
     }
 
-    private void carregarPedidos() {
+  private void carregarPedidos() {
+    try {
         pedidosList = pedidoController.listar();
         if (pedidosList == null || pedidosList.isEmpty()) {
-            System.out.println("Nenhum pedido encontrado.");
+            pedidoListView.setItems(FXCollections.observableArrayList("Nenhum pedido encontrado."));
         } else {
             ObservableList<String> pedidosDescricoes = FXCollections.observableArrayList();
+            // Filtra apenas os pedidos que não foram entregues
             for (Pedido pedido : pedidosList) {
-                pedidosDescricoes.add("Pedido " + pedido.getId() + " - " + pedido.getCliente().getNome());
+                if (pedido.getStatus() != StatusPedido.ENTREGUE) {
+                    pedidosDescricoes.add("Pedido " + pedido.getId() + " - " + pedido.getCliente().getNome());
+                }
             }
-            pedidoListView.setItems(pedidosDescricoes);
+            if (pedidosDescricoes.isEmpty()) {
+                pedidoListView.setItems(FXCollections.observableArrayList("Nenhum pedido pendente de entrega."));
+            } else {
+                pedidoListView.setItems(pedidosDescricoes);
+            }
         }
+    } catch (Exception e) {
+        exibirAlerta(Alert.AlertType.ERROR, "Erro", "Ocorreu um erro ao carregar os pedidos: " + e.getMessage());
     }
+}
+
 
     private void mostrarDetalhesPedido(int index) {
         if (index >= 0 && index < pedidosList.size()) {
             pedidoSelecionado = pedidosList.get(index);
-            valorTotalText.setText(String.valueOf(pedidoSelecionado.getValorTotal()));
-            atualizarItensListView(pedidoSelecionado.getItens());
-            mostrarCampos(true);
 
-            iniciarEntregaButton.setVisible(true);  // Mostrar botão de iniciar entrega
+            valorTotalText.setText(String.valueOf(pedidoSelecionado.getValorTotal()));
+
+            List<ItemPed> itens = pedidoSelecionado.getItens();
+            atualizarItensListView(itens);
+
+            mostrarCampos(true);
+            iniciarEntregaButton.setVisible(true);
         }
     }
 
     @FXML
     private void iniciarEntrega(ActionEvent event) throws IOException {
         if (pedidoSelecionado != null) {
-           // pedidoSelecionado.setStatus("Em entrega");  // Alterar o status do pedido
-            pedidoController.atualizar(pedidoSelecionado);  // Atualizar no banco de dados
-            exibirAlerta(Alert.AlertType.INFORMATION, "Entrega Iniciada", "O status do pedido foi alterado para 'Em entrega'.");
-            app.setRoot("ConfirmacaoEntrega");  // Navegar para a próxima tela
+            pedidoSelecionado.setStatus(StatusPedido.EM_ENTREGA);
+            pedidoController.atualizar(pedidoSelecionado);
+            if (pedidoSelecionado != null) {
+                GlobalContext.setCurrentPedido(pedidoSelecionado);
+                app.setRoot("ConfirmacaoEntrega");
+            }
         }
     }
 
@@ -117,7 +155,7 @@ public class InicialEntregaController implements Initializable {
 
     @FXML
     private void voltarTela(ActionEvent event) throws IOException {
-        app.setRoot("MenuInicial");  // Navegar de volta ao menu inicial
+        app.setRoot("MenuInicial");
     }
 
     public void setApp(App app) {

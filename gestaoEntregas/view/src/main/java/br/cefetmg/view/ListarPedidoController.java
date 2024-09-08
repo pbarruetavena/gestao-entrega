@@ -10,12 +10,16 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javafx.scene.control.Alert.AlertType;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.fxml.Initializable;
 
-public class ListarPedidoController {
+public class ListarPedidoController implements Initializable {
 
     private App app;
 
@@ -24,9 +28,6 @@ public class ListarPedidoController {
 
     @FXML
     private Button voltarButton;
-
-    @FXML
-    private Button salvarButton;
 
     @FXML
     private Button deletarButton;
@@ -41,79 +42,83 @@ public class ListarPedidoController {
     private TextField valorTotalText;
 
     @FXML
-    private ListView<ItemPed> itensListView;
+    private TextField statusText;
+
+    @FXML
+    private ListView<String> itensListView;
 
     private PedidoController pedidoController;
     private List<Pedido> pedidosList;
     private Pedido pedidoSelecionado;
-    private ObservableList<ItemPed> listaObsItens;
+    private ObservableList<String> listaObsItens;
 
-   
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        pedidoController = new PedidoController();
+        carregarPedidos();
 
-    private void adicionarListenersParaTextFields() {
-        ChangeListener<String> textChangeListener = (observable, oldValue, newValue) -> mostrarBotaoSalvar();
-        valorTotalText.textProperty().addListener(textChangeListener);
-    }
-
-    private void mostrarBotaoSalvar() {
-        salvarButton.setVisible(true);
-    }
-
-    private void carregarPedidos() {
-        pedidosList = pedidoController.listar();
-        if (pedidosList == null || pedidosList.isEmpty()) {
-            System.out.println("Nenhum pedido encontrado.");
-        } else {
-            ObservableList<String> pedidosDescricoes = FXCollections.observableArrayList();
-            for (Pedido pedido : pedidosList) {
-                pedidosDescricoes.add("Pedido " + pedido.getId() + " - " + pedido.getCliente().getNome());
-            }
-            pedidoListView.setItems(pedidosDescricoes);
-            pedidoListView.setOnMouseClicked((MouseEvent event) -> {
+        pedidoListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
                 int selectedIndex = pedidoListView.getSelectionModel().getSelectedIndex();
                 if (selectedIndex >= 0) {
                     mostrarDetalhesPedido(selectedIndex);
                 }
-            });
+            }
+        });
+
+        adicionarListenersParaTextFields();
+    }
+
+    private void adicionarListenersParaTextFields() {
+        ChangeListener<String> textChangeListener = (observable, oldValue, newValue) -> {
+        };
+        valorTotalText.textProperty().addListener(textChangeListener);
+        statusText.textProperty().addListener(textChangeListener);
+    }
+
+    private void carregarPedidos() {
+        try {
+            pedidosList = pedidoController.listar();
+            if (pedidosList == null || pedidosList.isEmpty()) {
+                pedidoListView.setItems(FXCollections.observableArrayList("Nenhum pedido encontrado."));
+            } else {
+                ObservableList<String> pedidosDescricoes = FXCollections.observableArrayList();
+                for (Pedido pedido : pedidosList) {
+                    pedidosDescricoes.add("Pedido " + pedido.getId() + " - " + pedido.getCliente().getNome());
+                }
+                pedidoListView.setItems(pedidosDescricoes);
+            }
+        } catch (Exception e) {
+            exibirAlerta(AlertType.ERROR, "Erro", "Ocorreu um erro ao carregar os pedidos: " + e.getMessage());
         }
     }
 
     private void mostrarDetalhesPedido(int index) {
         if (index >= 0 && index < pedidosList.size()) {
             pedidoSelecionado = pedidosList.get(index);
+
             valorTotalText.setText(String.valueOf(pedidoSelecionado.getValorTotal()));
-            atualizarItensListView(pedidoSelecionado.getItens());
+            statusText.setText(String.valueOf(pedidoSelecionado.getStatus()));
+
+            List<String> itensDescricoes = new ArrayList<>();
+            for (ItemPed item : pedidoSelecionado.getItens()) {
+                itensDescricoes.add(item.getProduto().getNome() + " - Qtd: " + item.getQuantidade());
+            }
+            atualizarItensListView(itensDescricoes);
             mostrarCampos(true);
         }
     }
 
-    private void atualizarItensListView(List<ItemPed> itens) {
+    private void atualizarItensListView(List<String> itens) {
         listaObsItens = FXCollections.observableArrayList(itens);
         itensListView.setItems(listaObsItens);
     }
 
     private void mostrarCampos(boolean visivel) {
         valorTotalText.setVisible(visivel);
+        statusText.setVisible(visivel);
         itensListView.setVisible(visivel);
-        salvarButton.setVisible(visivel);
         deletarButton.setVisible(visivel);
-    }
-
-    @FXML
-    private void salvarAtualizacoes(ActionEvent event) throws IOException {
-        if (pedidoSelecionado != null) {
-            try {
-                Double valorTotal = Double.parseDouble(valorTotalText.getText());
-                pedidoSelecionado.setValorTotal(valorTotal);
-                pedidoController.atualizar(pedidoSelecionado);
-                exibirAlerta(AlertType.INFORMATION, "Sucesso", "Pedido atualizado com sucesso!");
-                salvarButton.setVisible(false);
-            } catch (NumberFormatException e) {
-                exibirAlerta(AlertType.ERROR, "Erro", "Valor total inválido.");
-            } catch (Exception e) {
-                exibirAlerta(AlertType.ERROR, "Erro", "Ocorreu um erro ao atualizar o pedido: " + e.getMessage());
-            }
-        }
     }
 
     @FXML
@@ -123,13 +128,18 @@ public class ListarPedidoController {
                 pedidoController.remover(pedidoSelecionado.getId());
                 exibirAlerta(AlertType.INFORMATION, "Sucesso", "Pedido removido com sucesso!");
                 carregarPedidos();
-                valorTotalText.clear();
-                salvarButton.setVisible(false);
-                deletarButton.setVisible(false);
+                limparCampos();
             } catch (Exception e) {
                 exibirAlerta(AlertType.ERROR, "Erro", "Ocorreu um erro ao remover o pedido: " + e.getMessage());
             }
         }
+    }
+
+    private void limparCampos() {
+        valorTotalText.clear();
+        statusText.clear();
+        itensListView.setItems(FXCollections.observableArrayList());
+        deletarButton.setVisible(false);
     }
 
     private void exibirAlerta(AlertType tipo, String titulo, String mensagem) {

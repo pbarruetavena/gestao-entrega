@@ -24,7 +24,7 @@ import javafx.scene.control.Label;
 public class MenuInicialController implements Initializable {
 
     private App app;
-    
+
     @FXML
     private Label textBemVindo;
     @FXML
@@ -47,6 +47,8 @@ public class MenuInicialController implements Initializable {
     private Button ListarProdutos;
     @FXML
     private Button ListarPedido;
+    @FXML
+    private Button GerarRelatorio;
 
     public void setApp(App app) {
         this.app = app;
@@ -76,6 +78,7 @@ public class MenuInicialController implements Initializable {
         ListarProdutos.setVisible(false);
         ListarPedido.setVisible(false);
         InicialEntrega.setVisible(false);
+        GerarRelatorio.setVisible(false);
 
         if (current.isAtendente()) {
             CadastrarCliente.setVisible(true);
@@ -92,14 +95,16 @@ public class MenuInicialController implements Initializable {
             ListarFuncionario.setVisible(true);
             ListarProdutos.setVisible(true);
             ListarPedido.setVisible(true);
-
-        }
-        if (current.isEntregador()) {
-          
+            GerarRelatorio.setVisible(true);
             InicialEntrega.setVisible(true);
 
         }
-        
+        if (current.isEntregador()) {
+
+            InicialEntrega.setVisible(true);
+
+        }
+
     }
 
     @FXML
@@ -116,36 +121,41 @@ public class MenuInicialController implements Initializable {
     private void CadastrarCliente() throws IOException {
         app.setRoot("CadastrarCliente");
     }
+
     @FXML
     private void CadastrarFuncionario() throws IOException {
         app.setRoot("CadastrarFuncionario");
     }
+
     @FXML
     private void CadastrarProduto() throws IOException {
         app.setRoot("CadastrarProduto");
     }
+
     @FXML
     private void ListarFuncionario() throws IOException {
         app.setRoot("ListarFuncionario");
     }
+
     @FXML
     private void ListarProdutos() throws IOException {
         app.setRoot("ListarProduto");
     }
-    
+
     @FXML
     private void ListarPedidos() throws IOException {
         app.setRoot("ListarPedido");
     }
+
     @FXML
-    private void InicialEntrega() throws IOException{
+    private void InicialEntrega() throws IOException {
         app.setRoot("InicialEntrega");
     }
+
     @FXML
     private void GerarRelatorio() throws IOException {
         app.setRoot("GerarRelatorio");
     }
-    
 
     @FXML
     private void Sair() throws IOException {

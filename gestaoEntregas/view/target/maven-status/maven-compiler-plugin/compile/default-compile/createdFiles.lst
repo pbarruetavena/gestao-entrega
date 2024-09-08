@@ -1,11 +1,13 @@
 br\cefetmg\view\SecondaryController.class
 br\cefetmg\view\ListarPedidoController.class
 br\cefetmg\view\App.class
+br\cefetmg\view\InicialEntregaController$1.class
 br\cefetmg\view\GlobalContext.class
 br\cefetmg\view\FazerPedidoController$3.class
 br\cefetmg\view\CadastrarProdutoController.class
 br\cefetmg\view\ListarProdutoController.class
 br\cefetmg\view\TelaFuncionarioController.class
+br\cefetmg\view\InicialEntregaController$1$1.class
 br\cefetmg\view\FazerPedidoController$2.class
 br\cefetmg\view\CadastrarFuncionarioController.class
 br\cefetmg\view\GerarRelatorioController$2.class

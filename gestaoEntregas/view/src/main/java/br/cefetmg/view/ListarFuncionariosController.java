@@ -39,6 +39,12 @@ public class ListarFuncionariosController {
 
     @FXML
     private Label telefoneLabel;
+    
+    @FXML
+    private Label cargoLabel;
+    
+    @FXML
+    private TextField cargoText;
 
     @FXML
     private TextField telefoneText;
@@ -52,6 +58,7 @@ public class ListarFuncionariosController {
 
     private String nomeOriginal;
     private String telefoneOriginal;
+    private String cargo;
 
     private App app;
 
@@ -104,9 +111,21 @@ public class ListarFuncionariosController {
 
             nomeOriginal = funcionarioSelecionado.getNome();
             telefoneOriginal = funcionarioSelecionado.getTelefone();
+            if(funcionarioSelecionado.isAdministrador()){
+            cargo="Administrador";
+            }
+            if(funcionarioSelecionado.isAtendente()){
+                cargo="Atendente";
+            }
+            if(funcionarioSelecionado.isEntregador()){
+                cargo="Entregador";
+            }
+            
 
             nomeText.setText(nomeOriginal);
             telefoneText.setText(telefoneOriginal);
+            cargoText.setText(cargo);
+            
 
             mostrarCampos(true);
         }

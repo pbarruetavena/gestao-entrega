@@ -1,26 +1,28 @@
-/* Define um estilo global para a tela */
+    /* Define um estilo global para a tela */
 .root {
     -fx-font-family: "Arial";
     -fx-background-color: #f4f4f4;
+    -fx-padding: 20px;
 }
 
 /* Estilo para o Label de boas-vindas */
 .label {
-    -fx-font-size: 18px;
+    -fx-font-size: 15px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
-    -fx-padding: 10 0 10 0;
+    -fx-padding: 10 0;
 }
 
 /* Estilo para os botões principais */
 .button {
     -fx-background-color: #2a9d8f;
     -fx-text-fill: white;
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
     -fx-font-weight: bold;
-    -fx-padding: 10;
+    -fx-padding: 10 15;
     -fx-background-radius: 5;
     -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 1);
 }
 
 .button:hover {
@@ -42,25 +44,42 @@
     -fx-padding: 20;
 }
 
+/* Estilo para campos de texto */
 .text-field {
     -fx-background-color: white;
     -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
     -fx-padding: 8;
-    -fx-background-radius: 3;
-    -fx-border-radius: 3;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 2, 0, 0, 1);
 }
 
 /* Estilo para ListViews */
 .list-view {
     -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
     -fx-background-color: white;
+    -fx-background-insets: 0, 0, 0, 0;
+    -fx-padding: 5;
 }
 
 /* Estilo para botões de ação específicos */
 #voltarButton, #salvarButton, #deletarButton {
     -fx-background-color: #e76f51;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
 }
 
 #voltarButton:hover, #salvarButton:hover, #deletarButton:hover {
-    -fx-background-color: #e06a4d;
+    -fx-background-color: #d65a43;
+}
+
+/* Estilo específico para o botão salvar */
+#salvar {
+    -fx-background-color: #2a9d8f;
+}
+
+#salvar:hover {
+    -fx-background-color: #21867a;
 }
