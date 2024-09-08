@@ -25,7 +25,7 @@ public class Cliente {
     private Empresa empresa;
     
     @OneToMany(fetch = FetchType.EAGER,
-            cascade = CascadeType.PERSIST,
+            cascade = CascadeType.ALL,
             mappedBy = "cliente")
     private ArrayList<Pedido> pedidos;
     

@@ -1,7 +1,61 @@
-/*
- * Empty Stylesheet file.
- */
+/* Define o estilo geral do AnchorPane */
+.AnchorPane {
+    -fx-background-color: #f0f0f0; /* Cor de fundo clara */
+    -fx-padding: 20px; /* Espaçamento interno */
+}
 
-.mainFxmlClass {
+/* Estilo para o GridPane */
+.GridPane {
+    -fx-hgap: 10; /* Espaçamento horizontal entre colunas */
+    -fx-vgap: 10; /* Espaçamento vertical entre linhas */
+    -fx-alignment: center; /* Centraliza o conteúdo */
+}
 
+/* Estilo para o Label de boas-vindas */
+#textBemVindo {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333; /* Cor do texto */
+    -fx-alignment: center;
+    -fx-margin: 0 0 20px 0; /* Margem inferior para separar dos botões */
+}
+
+/* Estilo para todos os botões */
+.button {
+    -fx-background-color: #007bff; /* Cor de fundo dos botões */
+    -fx-text-fill: white; /* Cor do texto */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-margin: 5px; /* Margem entre os botões */
+    -fx-border-radius: 5px; /* Bordas arredondadas */
+    -fx-background-radius: 5px; /* Bordas arredondadas */
+    -fx-cursor: hand; /* Cursor em forma de mão ao passar sobre o botão */
+}
+
+/* Estilo para o botão quando o cursor está sobre ele */
+.button:hover {
+    -fx-background-color: #0056b3; /* Cor de fundo ao passar o cursor */
+}
+
+/* Estilo para botões desativados */
+.button:disabled {
+    -fx-background-color: #c0c0c0; /* Cor de fundo para botões desativados */
+    -fx-text-fill: #6c757d; /* Cor do texto para botões desativados */
+}
+
+/* Estilo para o botão "Sair" */
+#Sair {
+    -fx-background-color: #dc3545; /* Cor de fundo diferente para o botão Sair */
+}
+
+/* Estilo para o botão "Entregas" */
+
+
+/* Estilo para botões centralizados quando perfil é Entregador ou Atendente */
+.entregador .GridPane,
+.atendente .GridPane {
+    -fx-alignment: center;
+    -fx-hgap: 20;
+    -fx-vgap: 20;
 }

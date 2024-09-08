@@ -2,6 +2,7 @@ package br.cefetmg.view;
 
 import br.cefetmg.controller.PedidoController;
 import br.cefetmg.entidades.Pedido;
+import br.cefetmg.entidades.StatusPedido;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,7 +18,6 @@ public class ConfirmacaoEntregaController implements Initializable {
     private Button confirmarEntrega;
 
     private PedidoController pedidoController;
-    private Pedido pedidoSelecionado;
     private App app;
 
     @Override
@@ -27,8 +27,9 @@ public class ConfirmacaoEntregaController implements Initializable {
 
     @FXML
     private void confirmarEntrega(ActionEvent event) {
+        Pedido pedidoSelecionado = GlobalContext.getCurrentPedido();
         if (pedidoSelecionado != null) {
-            //pedidoSelecionado.setStatus.('');
+            pedidoSelecionado.setStatus(StatusPedido.ENTREGUE);
             pedidoController.atualizar(pedidoSelecionado);
             exibirAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Entrega confirmada!");
             try {
@@ -47,16 +48,16 @@ public class ConfirmacaoEntregaController implements Initializable {
         alerta.showAndWait();
     }
 
+    @FXML
+    private void voltarTela(ActionEvent event) throws IOException {
+        Pedido pedidoSelecionado = GlobalContext.getCurrentPedido();
+        if (pedidoSelecionado != null) {
+            pedidoSelecionado.setStatus(StatusPedido.EM_PREPARO);
+        }
+        app.setRoot("InicialEntrega");
+    }
+
     public void setApp(App app) {
         this.app = app;
     }
-
-    public void setPedidoSelecionado(Pedido pedido) {
-        this.pedidoSelecionado = pedido;
-    }
-     @FXML
-    private void voltarTela(ActionEvent event) throws IOException {
-        app.setRoot("MenuInicial");
-    }
-
 }

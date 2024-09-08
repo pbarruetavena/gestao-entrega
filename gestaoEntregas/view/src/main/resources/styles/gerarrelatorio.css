@@ -1,7 +1,83 @@
-/*
- * Empty Stylesheet file.
- */
+/* Estilo geral para o layout */
+.AnchorPane {
+    -fx-background-color: #f0f0f0; /* Cor de fundo clara */
+    -fx-padding: 20px; /* Espaçamento interno */
+    -fx-alignment: center; /* Centraliza o conteúdo dentro do AnchorPane */
+}
 
-.mainFxmlClass {
+/* Estilo para os DatePickers */
+.DatePicker {
+    -fx-background-color: white;
+    -fx-border-color: #007bff;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+}
 
+/* Estilo para os Spinners */
+.Spinner {
+    -fx-background-color: white;
+    -fx-border-color: #007bff;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+}
+
+/* Estilo para as ListViews */
+.ListView {
+    -fx-background-color: white;
+    -fx-border-color: #007bff;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-pref-width: 300px; /* Largura preferencial para ListViews */
+    -fx-pref-height: 300px; /* Altura preferencial para ListViews */
+}
+
+/* Estilo para os botões */
+.Button {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+/* Estilo para o botão quando o cursor está sobre ele */
+.Button:hover {
+    -fx-background-color: #0056b3;
+}
+
+/* Estilo para o botão de "Voltar" */
+#voltar {
+    -fx-background-color: #dc3545; /* Cor de fundo vermelha */
+}
+
+/* Estilo para o botão de "Pesquisar" */
+#pesquisar {
+    -fx-background-color: #28a745; /* Cor de fundo verde */
+}
+
+/* Estilo para o texto de detalhes na ListView */
+.ListView .cell {
+    -fx-text-fill: #333;
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+}
+
+/* Estilo para os labels */
+.Label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 5px;
 }

@@ -1,15 +1,11 @@
-
 package br.cefetmg.view;
 
 import br.cefetmg.entidades.Funcionario;
+import br.cefetmg.entidades.Pedido;
 
-/**
- *
- * @author Pedro Gabriel
- * Classe global para armazenar o login da sessão
- */
 public class GlobalContext {
     private static Funcionario currentFuncionario;
+    private static Pedido currentPedido;
 
     public static Funcionario getCurrentFuncionario() {
         return currentFuncionario;
@@ -19,4 +15,11 @@ public class GlobalContext {
         currentFuncionario = funcionario;
     }
 
+    public static Pedido getCurrentPedido() {
+        return currentPedido;
+    }
+
+    public static void setCurrentPedido(Pedido pedido) {
+        currentPedido = pedido;
+    }
 }

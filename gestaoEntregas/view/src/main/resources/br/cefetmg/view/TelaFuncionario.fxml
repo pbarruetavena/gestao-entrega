@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="br.cefetmg.view.TelaFuncionarioController">
     <stylesheets>
-        <URL value="@/styles/telafuncionario.css" />
+        <URL value="@/styles/cadastrarproduto.css" />
     </stylesheets>
     <children>
         <GridPane layoutX="20.0" layoutY="26.0" prefHeight="374.0" prefWidth="542.0">
