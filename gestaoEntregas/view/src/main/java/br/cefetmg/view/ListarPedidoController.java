@@ -48,14 +48,7 @@ public class ListarPedidoController {
     private Pedido pedidoSelecionado;
     private ObservableList<ItemPed> listaObsItens;
 
-    @FXML
-    public void initialize() {
-        pedidoController = new PedidoController();
-        carregarPedidos();
-        adicionarListenersParaTextFields();
-        salvarButton.setVisible(false);
-        deletarButton.setVisible(false);
-    }
+   
 
     private void adicionarListenersParaTextFields() {
         ChangeListener<String> textChangeListener = (observable, oldValue, newValue) -> mostrarBotaoSalvar();

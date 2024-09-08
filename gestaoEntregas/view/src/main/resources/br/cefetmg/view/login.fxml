@@ -4,8 +4,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
 
+
+
+ 
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.view.Login" spacing="10" alignment="CENTER">
+    <stylesheets>
+        <URL value="@/styles/cadastrarproduto.css" />
+    </stylesheets>
     <Label fx:id="labelUsuario" text="Usuário:"/>
     <TextField fx:id="TextUsuario" promptText="Digite seu usuário"/>
     

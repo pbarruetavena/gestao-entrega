@@ -27,7 +27,8 @@ public class MenuInicialController implements Initializable {
     
     @FXML
     private Label textBemVindo;
-
+    @FXML
+    private Button InicialEntrega;
     @FXML
     private Button SairSis;
     @FXML
@@ -74,6 +75,7 @@ public class MenuInicialController implements Initializable {
         ListarFuncionario.setVisible(false);
         ListarProdutos.setVisible(false);
         ListarPedido.setVisible(false);
+        InicialEntrega.setVisible(false);
 
         if (current.isAtendente()) {
             CadastrarCliente.setVisible(true);
@@ -94,9 +96,10 @@ public class MenuInicialController implements Initializable {
         }
         if (current.isEntregador()) {
           
-            ListarPedido.setVisible(true);
+            InicialEntrega.setVisible(true);
 
         }
+        
     }
 
     @FXML
@@ -134,7 +137,10 @@ public class MenuInicialController implements Initializable {
     private void ListarPedidos() throws IOException {
         app.setRoot("ListarPedido");
     }
-    
+    @FXML
+    private void InicialEntrega() throws IOException{
+        app.setRoot("InicialEntrega");
+    }
     @FXML
     private void GerarRelatorio() throws IOException {
         app.setRoot("GerarRelatorio");
